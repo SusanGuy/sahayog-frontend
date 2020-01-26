@@ -1,18 +1,18 @@
 import React from "react";
-import Navigation from "./components/navigation/navigation";
+import withAlert from "./hoc/withAlert/withAlert";
 import { Switch, Route } from "react-router-dom";
+import Aux from "./hoc/Aux/aux";
 import Footer from "./components/footer/footer";
 import "./App.css";
 
 function App() {
   return (
-    <div>
-      <Navigation />
+    <Aux>
       <Switch>
         <Route to="/"></Route>
       </Switch>
-    </div>
+    </Aux>
   );
 }
 
-export default App;
+export default withAlert(App);

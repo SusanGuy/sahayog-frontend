@@ -1,10 +1,10 @@
 .main-header {
-  height: 4vh;
+  height: 3vh;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 30px 10%;
-  background-color: #24252a;
+  padding: 30px 4%;
+  background-color: #fff;
   text-transform: uppercase;
 }
 
@@ -25,7 +25,6 @@ button {
   border: none;
   border-radius: 50px;
   cursor: pointer;
-
   transition: all 0.3s ease 0s;
   color: #edf0f1;
 }
