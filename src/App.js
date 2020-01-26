@@ -11,7 +11,6 @@ function App() {
       <Switch>
         <Route to="/"></Route>
       </Switch>
-      <Footer />
     </div>
   );
 }

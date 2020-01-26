@@ -1,46 +1,35 @@
-.navigation {
-}
-
 .main-header {
-  height: 7vh;
-}
-
-.navigation-items {
+  height: 4vh;
   display: flex;
-  width: 50%;
-  list-style: none;
-  height: 60%;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
-  margin-left: auto;
-  margin-top: 20px;
+  padding: 30px 10%;
+  background-color: #24252a;
+  text-transform: uppercase;
 }
 
-.sign-in,
-.navigation-item {
-  font-size: 22px;
-  padding: 10px;
+.logo {
+  text-transform: none;
+  cursor: pointer;
+  width: 50px;
+  margin-right: auto;
+  color: rgb(25, 175, 175);
 }
 
-.navigation-item a {
-  padding: 10px;
-  color: #838383;
-  text-decoration: none;
+button {
+  font-weight: 500;
+  font-size: 16px;
+  margin-left: 20px;
+  padding: 9px 25px;
+  background-color: rgba(25, 175, 175, 1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+
+  transition: all 0.3s ease 0s;
+  color: #edf0f1;
 }
 
-.sign-in a {
-  padding: 10px;
-  background: #15c7c7;
-  color: white;
-  border-radius: 3px;
-}
-
-.sign-in a:hover {
-  background: #109999;
-}
-
-.navigation-item a:hover {
-  background: #15c7c7;
-  color: white;
-  border-radius: 3px;
+button:hover {
+  background-color: rgba(25, 175, 175, 0.8);
 }
