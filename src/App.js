@@ -1,9 +1,19 @@
 import React from "react";
-
+import Navigation from "./components/navigation/navigation";
+import { Switch, Route } from "react-router-dom";
+import Footer from "./components/footer/footer";
 import "./App.css";
 
 function App() {
-  return <div>Hello Sahayog</div>;
+  return (
+    <div>
+      <Navigation />
+      <Switch>
+        <Route to="/"></Route>
+      </Switch>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

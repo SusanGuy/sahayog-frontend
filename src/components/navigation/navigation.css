@@ -1,0 +1,46 @@
+.navigation {
+}
+
+.main-header {
+  height: 7vh;
+}
+
+.navigation-items {
+  display: flex;
+  width: 50%;
+  list-style: none;
+  height: 60%;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: auto;
+  margin-top: 20px;
+}
+
+.sign-in,
+.navigation-item {
+  font-size: 22px;
+  padding: 10px;
+}
+
+.navigation-item a {
+  padding: 10px;
+  color: #838383;
+  text-decoration: none;
+}
+
+.sign-in a {
+  padding: 10px;
+  background: #15c7c7;
+  color: white;
+  border-radius: 3px;
+}
+
+.sign-in a:hover {
+  background: #109999;
+}
+
+.navigation-item a:hover {
+  background: #15c7c7;
+  color: white;
+  border-radius: 3px;
+}
