@@ -16,7 +16,7 @@
   color: rgb(25, 175, 175);
 }
 
-button {
+.sign-in {
   font-weight: 500;
   font-size: 16px;
   margin-left: 20px;
@@ -29,6 +29,6 @@ button {
   color: #edf0f1;
 }
 
-button:hover {
+.sign-in:hover {
   background-color: rgba(25, 175, 175, 0.8);
 }

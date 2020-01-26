@@ -1,0 +1,76 @@
+.main-auth-container {
+  padding: 2rem 1rem;
+  max-width: 18rem;
+  margin: 0 auto;
+}
+
+.main-auth-footer {
+  border-top: 1px solid #ddd;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.auth-footer-content {
+  color: rgb(43, 42, 42);
+}
+
+.auth-footer-content a {
+  text-decoration: none;
+  color: #15c7c7;
+}
+
+.auth-footer-content a:hover {
+  color: #109999;
+}
+
+.facebook-button {
+  font-size: 1em;
+  color: #fff;
+  background: #3b579d;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 600;
+  width: 100%;
+  margin: 0 0 1rem 0;
+  border: 1px solid transparent;
+  line-height: 2rem;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+.facebook-button:hover {
+  background-color: #4261b0;
+}
+
+.facebook-button .fab {
+  font-size: 1em;
+  color: #fff;
+  line-height: 0.875rem;
+  margin-right: 10px;
+}
+
+.word-line-break {
+  margin-bottom: 1rem;
+  position: relative;
+  text-align: center;
+  z-index: 10;
+  font-weight: 900;
+}
+
+.word-line-break span {
+  background: #fff;
+  padding: 0 2rem;
+}
+
+.word-line-break::after {
+  background: #ddd;
+  bottom: 0.5rem;
+  content: "";
+  display: block;
+  height: 0.0625rem;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: -10;
+}

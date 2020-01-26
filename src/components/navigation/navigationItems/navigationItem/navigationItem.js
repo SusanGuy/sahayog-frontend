@@ -4,9 +4,7 @@ import "./navigationItem.css";
 const navigationItem = props => {
   return (
     <li className="nav_link">
-      <Link to={props.link} exact={props.exact}>
-        {props.children}
-      </Link>
+      <Link to={props.link}>{props.children}</Link>
     </li>
   );
 };

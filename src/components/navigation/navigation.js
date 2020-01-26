@@ -9,8 +9,8 @@ const navigation = () => {
         sahayog<span></span>
       </h1>
       <NavigationItems />
-      <Link to="sign-in">
-        <button>Sign In</button>
+      <Link to="/auth">
+        <button className="sign-in">Sign In</button>
       </Link>
     </header>
   );
