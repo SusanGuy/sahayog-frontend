@@ -3,6 +3,7 @@ import Header from "../card-header/cardHeader";
 import { Link } from "react-router-dom";
 import CustomButton from "../CustomButton/customButton";
 import Aux from "../../hoc/Aux/aux";
+import "./card.css";
 const card = ({ type, children }) => {
   return (
     <Aux>

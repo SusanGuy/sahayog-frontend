@@ -9,9 +9,20 @@ const navigation = () => {
         sahayog<span></span>
       </h1>
       <NavigationItems />
-      <Link to="/auth">
-        <button className="sign-in">Sign In</button>
-      </Link>
+      {!localStorage.getItem("token") ? (
+        <Link to="/auth">
+          <button className="sign-in">Sign In</button>
+        </Link>
+      ) : (
+        <Link to="/">
+          <button
+            onClick={() => localStorage.removeItem("token")}
+            className="sign-in"
+          >
+            Sign Out
+          </button>
+        </Link>
+      )}
     </header>
   );
 };
