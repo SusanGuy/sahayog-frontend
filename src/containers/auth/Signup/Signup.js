@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Card from "../../../components/card/card";
+import axios from "../../../axios";
 import "./signup.css";
 import CustomButton from "../../../components/CustomButton/customButton";
 import CustomInput from "../../../components/input/input";
@@ -12,7 +13,7 @@ const Signup = () => {
     confirm_password: "",
     error: ""
   });
-  const { name, email, password, confirmPassword, error } = formData;
+  const { name, email, password, confirm_password, error } = formData;
 
   const handleFormChange = e => {
     if (error) {
@@ -28,12 +29,23 @@ const Signup = () => {
     });
   };
 
-  const handleFormSubmit = e => {
+  const handleFormSubmit = async e => {
     e.preventDefault();
-    if (password !== confirmPassword) {
+    if (password !== "" && password !== confirm_password) {
       return setformData({
         ...formData,
-        error: "Passwords donot match!"
+        error: {
+          authError: "Passwords donot match"
+        }
+      });
+    }
+    try {
+      const submitForm = { name, email, password };
+      await axios.post("/users/signup", submitForm);
+    } catch (err) {
+      setformData({
+        ...formData,
+        error: err.response.data
       });
     }
   };
@@ -46,37 +58,35 @@ const Signup = () => {
           name="name"
           value={name}
           placeholder="Full Name"
-          required
           onChange={e => handleFormChange(e)}
         />
-
+        {error.nameError && <ErrorBox>{error.nameError}!</ErrorBox>}
         <CustomInput
           type="email"
           name="email"
           value={email}
           placeholder="Email address"
-          required
           onChange={e => handleFormChange(e)}
         />
+        {error.emailError && <ErrorBox>{error.emailError}!</ErrorBox>}
         <CustomInput
           type="password"
           name="password"
           value={password}
           placeholder="Password"
-          required
           onChange={e => handleFormChange(e)}
         />
-
+        {error.passwordError && <ErrorBox>{error.passwordError}!</ErrorBox>}
         <CustomInput
           type="password"
           name="confirm_password"
-          value={confirmPassword}
+          value={confirm_password}
           placeholder="Confirm Password"
-          required
           onChange={e => handleFormChange(e)}
         />
-        {error && <ErrorBox>{error}</ErrorBox>}
+
         <CustomButton type="submit">Sign up to Sahayog</CustomButton>
+        {error.authError && <ErrorBox>{error.authError}!</ErrorBox>}
       </form>
     </Card>
   );

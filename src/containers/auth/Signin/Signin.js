@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 import Card from "../../../components/card/card";
 import axios from "../../../axios";
 import "./signin.css";
@@ -15,7 +14,7 @@ const Signin = () => {
   const { email, password, error } = formData;
 
   const handleFormChange = e => {
-    if (error) {
+    if (error.length !== 0) {
       return setformData({
         ...formData,
         error: ""
@@ -31,21 +30,14 @@ const Signin = () => {
     e.preventDefault();
     try {
       const submitForm = { email, password };
-      const {
-        data: { token }
-      } = await axios.post("/users/login", submitForm);
-      localStorage.setItem("token", token);
+      await axios.post("/users/login", submitForm);
     } catch (err) {
       setformData({
         ...formData,
-        error: err.response.data.errMessage + " !"
+        error: err.response.data
       });
     }
   };
-
-  if (localStorage.getItem("token")) {
-    return <Redirect to="/dashboard" />;
-  }
 
   return (
     <Card type="signin">
@@ -56,18 +48,18 @@ const Signin = () => {
           placeholder="Email address"
           value={email}
           onChange={e => handleFormChange(e)}
-          required
         />
+        {error.emailError && <ErrorBox>{error.emailError}!</ErrorBox>}
         <CustomInput
           type="password"
           name="password"
           placeholder="Password"
           onChange={e => handleFormChange(e)}
           value={password}
-          required
         />
-        {error && <ErrorBox>{error}</ErrorBox>}
+        {error.passwordError && <ErrorBox>{error.passwordError}!</ErrorBox>}
         <CustomButton type="submit">Sign in to Sahayog</CustomButton>
+        {error.authError && <ErrorBox>{error.authError}!</ErrorBox>}
       </form>
     </Card>
   );
