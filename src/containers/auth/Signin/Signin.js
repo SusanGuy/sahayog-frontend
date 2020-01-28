@@ -1,25 +1,21 @@
 import React, { useState } from "react";
 import Card from "../../../components/card/card";
-import axios from "../../../axios";
+import { connect } from "react-redux";
+import Spinner from "react-bootstrap/Spinner";
+import { login, clearErrors } from "../../../store/actions/auth";
 import "./signin.css";
 import CustomButton from "../../../components/CustomButton/customButton";
 import CustomInput from "../../../components/input/input";
 import ErrorBox from "../../../components/errorMessage/errorMessage";
-const Signin = () => {
+const Signin = ({ error, loading, login, clearErrors }) => {
   const [formData, setformData] = useState({
     email: "",
-    password: "",
-    error: ""
+    password: ""
   });
-  const { email, password, error } = formData;
+  const { email, password } = formData;
 
   const handleFormChange = e => {
-    if (error.length !== 0) {
-      return setformData({
-        ...formData,
-        error: ""
-      });
-    }
+    clearErrors();
     setformData({
       ...formData,
       [e.target.name]: e.target.value
@@ -28,15 +24,7 @@ const Signin = () => {
 
   const handleFormSubmit = async e => {
     e.preventDefault();
-    try {
-      const submitForm = { email, password };
-      await axios.post("/users/login", submitForm);
-    } catch (err) {
-      setformData({
-        ...formData,
-        error: err.response.data
-      });
-    }
+    login(email, password);
   };
 
   return (
@@ -58,11 +46,27 @@ const Signin = () => {
           value={password}
         />
         {error.passwordError && <ErrorBox>{error.passwordError}!</ErrorBox>}
-        <CustomButton type="submit">Sign in to Sahayog</CustomButton>
+        <CustomButton type="submit">
+          {loading ? <Spinner animation="border" /> : "Sign in to Sahayog"}
+        </CustomButton>
         {error.authError && <ErrorBox>{error.authError}!</ErrorBox>}
       </form>
     </Card>
   );
 };
 
-export default Signin;
+const mapStateToProps = state => {
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error
+  };
+};
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     login: () => dispatch(login),
+//     clearErrors: () => dispatch(clearErrors)
+//   };
+// };
+
+export default connect(mapStateToProps, { login, clearErrors })(Signin);
