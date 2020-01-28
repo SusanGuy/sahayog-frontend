@@ -15,7 +15,10 @@ const Signin = ({ error, loading, login, clearErrors }) => {
   const { email, password } = formData;
 
   const handleFormChange = e => {
-    clearErrors();
+    if (Object.keys(error).length !== 0) {
+      return clearErrors();
+    }
+
     setformData({
       ...formData,
       [e.target.name]: e.target.value

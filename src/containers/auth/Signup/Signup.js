@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Card from "../../../components/card/card";
-import axios from "../../../axios";
+import axios from "axios";
 import "./signup.css";
 import CustomButton from "../../../components/CustomButton/customButton";
 import CustomInput from "../../../components/input/input";

@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Auth from "./containers/auth/auth";
 import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { loadUser } from "./store/actions/auth";
 import Aux from "./hoc/Aux/aux";
 import Dashboard from "./containers/dashboard/dashboard";
 import Navigation from "./components/navigation/navigation";
+
 import "./App.css";
 
-function App() {
+const App = ({ loadUser }) => {
+  useEffect(() => {
+    loadUser();
+  }, [loadUser]);
+
   return (
     <Aux>
       <Navigation />
@@ -17,6 +25,6 @@ function App() {
       </Switch>
     </Aux>
   );
-}
+};
 
-export default App;
+export default connect(null, { loadUser })(App);

@@ -1,8 +1,8 @@
 import * as actionTypes from "../actions/actionTypes";
 const initialState = {
-  token: null,
+  token: localStorage.getItem("token"),
   user: null,
-  error: "",
+  error: {},
   loading: false
 };
 
@@ -16,11 +16,13 @@ const authReducer = (state = initialState, action) => {
       };
 
     case actionTypes.AUTH_SUCCESS:
+      localStorage.setItem("token", payload.token);
       return {
         ...state,
         loading: false,
-        error: "",
-        ...payload
+        error: {},
+        token: payload.token,
+        user: payload.user
       };
     case actionTypes.AUTH_FAIL:
       return {
@@ -33,14 +35,14 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        error: "",
+        error: {},
         ...payload
       };
 
     case actionTypes.CLEAR_ERRORS:
       return {
         ...state,
-        error: ""
+        error: {}
       };
     default:
       return state;

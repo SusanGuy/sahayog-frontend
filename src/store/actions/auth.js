@@ -1,6 +1,5 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
-import { setAuthToken } from "../../axios";
 
 const userLoaded = (token, user) => {
   return {
@@ -30,15 +29,12 @@ export const login = (email, password) => {
 
 export const loadUser = () => {
   return async dispatch => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
-
     try {
       dispatch(authStart());
-      const res = await axios.get("/users/me");
+      const { data } = await axios.get("/users/me");
+      console.log(data);
 
-      dispatch(userLoaded(localStorage.token, res.data));
+      dispatch(userLoaded(localStorage.token, data));
     } catch (err) {
       dispatch(authFail(err));
     }
