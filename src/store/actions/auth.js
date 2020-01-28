@@ -12,7 +12,7 @@ export const clearErrors = () => {
   return { type: actionTypes.CLEAR_ERRORS };
 };
 
-export const login = (email, password) => {
+export const login = (email, password, history) => {
   return async dispatch => {
     try {
       dispatch(authStart());
@@ -21,6 +21,30 @@ export const login = (email, password) => {
         data: { user, token }
       } = await axios.post("/users/login", submitForm);
       dispatch(authSuccess(token, user));
+      history.push("/dashboard");
+    } catch (err) {
+      dispatch(authFail(err.response.data));
+    }
+  };
+};
+
+export const signup = (name, email, password, confirm_password, history) => {
+  return async dispatch => {
+    if (password !== "" && password !== confirm_password) {
+      return dispatch(
+        authFail({
+          authError: "Passwords donot match"
+        })
+      );
+    }
+    try {
+      dispatch(authStart());
+      const submitForm = { name, email, password };
+      const {
+        data: { user, token }
+      } = await axios.post("/users/signup", submitForm);
+      dispatch(authSuccess(token, user));
+      history.push("/dashboard");
     } catch (err) {
       dispatch(authFail(err.response.data));
     }
@@ -32,11 +56,10 @@ export const loadUser = () => {
     try {
       dispatch(authStart());
       const { data } = await axios.get("/users/me");
-      console.log(data);
 
       dispatch(userLoaded(localStorage.token, data));
     } catch (err) {
-      dispatch(authFail(err));
+      dispatch(authFail(err.response.data));
     }
   };
 };
@@ -60,13 +83,8 @@ const authFail = error => {
   };
 };
 
-const signout = () => {
+export const signout = () => {
   return {
     type: actionTypes.AUTH_LOGOUT
   };
-};
-
-export const logout = () => {
-  localStorage.removeItem("token");
-  signout();
 };

@@ -1,28 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../../../components/card/card";
-import axios from "axios";
+import { signup, clearErrors } from "../../../store/actions/auth";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import Spinner from "react-bootstrap/Spinner";
 import "./signup.css";
 import CustomButton from "../../../components/CustomButton/customButton";
 import CustomInput from "../../../components/input/input";
 import ErrorBox from "../../../components/errorMessage/errorMessage";
-const Signup = () => {
+const Signup = ({ error, loading, signup, clearErrors, history }) => {
   const [formData, setformData] = useState({
     name: "",
     email: "",
     password: "",
-    confirm_password: "",
-    error: ""
+    confirm_password: ""
   });
-  const { name, email, password, confirm_password, error } = formData;
+  const { name, email, password, confirm_password } = formData;
+  useEffect(() => {
+    clearErrors();
+  }, [clearErrors, name, email, password]);
 
   const handleFormChange = e => {
-    if (error) {
-      return setformData({
-        ...formData,
-        error: ""
-      });
+    if (Object.keys(error).length !== 0) {
+      return clearErrors();
     }
-
     setformData({
       ...formData,
       [e.target.name]: e.target.value
@@ -31,23 +32,8 @@ const Signup = () => {
 
   const handleFormSubmit = async e => {
     e.preventDefault();
-    if (password !== "" && password !== confirm_password) {
-      return setformData({
-        ...formData,
-        error: {
-          authError: "Passwords donot match"
-        }
-      });
-    }
-    try {
-      const submitForm = { name, email, password };
-      await axios.post("/users/signup", submitForm);
-    } catch (err) {
-      setformData({
-        ...formData,
-        error: err.response.data
-      });
-    }
+
+    signup(name, email, password, confirm_password, history);
   };
 
   return (
@@ -85,11 +71,22 @@ const Signup = () => {
           onChange={e => handleFormChange(e)}
         />
 
-        <CustomButton type="submit">Sign up to Sahayog</CustomButton>
+        <CustomButton type="submit">
+          {loading ? <Spinner animation="border" /> : "Sign up to Sahayog"}
+        </CustomButton>
         {error.authError && <ErrorBox>{error.authError}!</ErrorBox>}
       </form>
     </Card>
   );
 };
 
-export default Signup;
+const mapStateToProps = state => {
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error
+  };
+};
+
+export default connect(mapStateToProps, { signup, clearErrors })(
+  withRouter(Signup)
+);

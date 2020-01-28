@@ -1,24 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../../../components/card/card";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import { login, clearErrors } from "../../../store/actions/auth";
 import "./signin.css";
 import CustomButton from "../../../components/CustomButton/customButton";
 import CustomInput from "../../../components/input/input";
 import ErrorBox from "../../../components/errorMessage/errorMessage";
-const Signin = ({ error, loading, login, clearErrors }) => {
+const Signin = ({ error, loading, login, clearErrors, history }) => {
   const [formData, setformData] = useState({
     email: "",
     password: ""
   });
   const { email, password } = formData;
 
-  const handleFormChange = e => {
-    if (Object.keys(error).length !== 0) {
-      return clearErrors();
-    }
+  useEffect(() => {
+    clearErrors();
+  }, [clearErrors, email, password]);
 
+  const handleFormChange = e => {
     setformData({
       ...formData,
       [e.target.name]: e.target.value
@@ -27,7 +28,7 @@ const Signin = ({ error, loading, login, clearErrors }) => {
 
   const handleFormSubmit = async e => {
     e.preventDefault();
-    login(email, password);
+    login(email, password, history);
   };
 
   return (
@@ -65,11 +66,6 @@ const mapStateToProps = state => {
   };
 };
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     login: () => dispatch(login),
-//     clearErrors: () => dispatch(clearErrors)
-//   };
-// };
-
-export default connect(mapStateToProps, { login, clearErrors })(Signin);
+export default connect(mapStateToProps, { login, clearErrors })(
+  withRouter(Signin)
+);
