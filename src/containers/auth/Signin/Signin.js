@@ -17,9 +17,12 @@ const Signin = ({ error, loading, login, clearErrors, history }) => {
 
   useEffect(() => {
     clearErrors();
-  }, [clearErrors, email, password]);
+  }, [clearErrors]);
 
   const handleFormChange = e => {
+    if (Object.keys(error).length !== 0) {
+      clearErrors();
+    }
     setformData({
       ...formData,
       [e.target.name]: e.target.value

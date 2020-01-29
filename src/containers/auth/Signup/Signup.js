@@ -16,14 +16,17 @@ const Signup = ({ error, loading, signup, clearErrors, history }) => {
     confirm_password: ""
   });
   const { name, email, password, confirm_password } = formData;
+
   useEffect(() => {
     clearErrors();
-  }, [clearErrors, name, email, password]);
+  }, [clearErrors]);
 
   const handleFormChange = e => {
-    if (Object.keys(error).length !== 0) {
-      return clearErrors();
-    }
+
+       if (Object.keys(error).length !== 0) {
+         clearErrors();
+       }
+
     setformData({
       ...formData,
       [e.target.name]: e.target.value

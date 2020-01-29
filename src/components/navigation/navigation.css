@@ -30,6 +30,13 @@
   color: #edf0f1;
 }
 
+.sign-out {
+  font-family: inherit;
+  background-color: #fff;
+  color: #55565a;
+}
+
 .sign-in:hover {
   background-color: rgba(25, 175, 175, 0.8);
+  color: #fff;
 }

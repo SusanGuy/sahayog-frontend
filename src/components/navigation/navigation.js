@@ -7,17 +7,20 @@ import NavigationItems from "./navigationItems/navigationItems";
 const navigation = ({ isAuthenticated, history }) => {
   return (
     <header className="main-header">
-      <h1 onClick={() => history.push("/")} className="logo">
+      <h1
+        onClick={() => history.push(!isAuthenticated ? "/" : "/dashboard")}
+        className="logo"
+      >
         sahayog<span></span>
       </h1>
-      <NavigationItems />
+      <NavigationItems isAuthenticated={isAuthenticated} />
       {!isAuthenticated ? (
         <Link to="/auth">
           <button className="sign-in">Sign In</button>
         </Link>
       ) : (
         <Link to="/logout">
-          <button className="sign-in">Sign Out</button>
+          <button className="sign-in sign-out">Sign Out</button>
         </Link>
       )}
     </header>

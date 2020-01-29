@@ -1,7 +1,8 @@
 import React from "react";
 import NavigationItem from "./navigationItem/navigationItem";
+import DropDownMenu from "../../dropdown-menu/DropDownMenu";
 
-const navigationItems = () => {
+const navigationItems = ({ isAuthenticated }) => {
   return (
     <nav>
       <NavigationItem link="/raise" exact>
@@ -13,6 +14,7 @@ const navigationItems = () => {
       <NavigationItem link="/resources" exact>
         Resources
       </NavigationItem>
+      {isAuthenticated && <DropDownMenu />}
     </nav>
   );
 };
