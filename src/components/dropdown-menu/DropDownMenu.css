@@ -28,6 +28,7 @@
 }
 
 .dropdown-button img {
+  cursor: pointer;
   width: 25px;
   height: 25px;
   border: solid 2px transparent;
@@ -36,6 +37,7 @@
 }
 
 .caret {
+  cursor: pointer;
   margin: 0 9px 0 9px;
   display: inline-block;
   width: 0;
@@ -44,4 +46,12 @@
   border-top: 4px solid;
   border-right: 4px solid transparent;
   border-left: 4px solid transparent;
+}
+
+.caret:hover {
+  transition: transform 2s ease-in-out;
+  border-bottom: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  border-top: none;
 }
