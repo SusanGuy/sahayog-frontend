@@ -23,7 +23,7 @@ const DropDownMenu = () => {
 
   return (
     <li className=" logged-in">
-      <div onClick={() => setHidden(!hidden)} ref={node} className="dropdown">
+      <div className="dropdown">
         <Link className="dropdown-link" to="/my-campaigns">
           <button className="dropdown-button">
             <img
@@ -32,12 +32,12 @@ const DropDownMenu = () => {
             />
           </button>
         </Link>
-        <span className="caret" />
+        <span ref={node} onClick={() => setHidden(!hidden)} className="caret" />
       </div>
       {hidden && (
         <ul className="dropdown-menu">
-          <DropDownItem link="/campaigns">My Campaigns</DropDownItem>
-          <DropDownItem link="/donations">My Donations</DropDownItem>
+          <DropDownItem link="/my-campaigns">My Campaigns</DropDownItem>
+          <DropDownItem link="/my-donations">My Donations</DropDownItem>
           <DropDownItem link="/edit-profile">My Profile</DropDownItem>
           <DropDownItem link="/account-settings">Account Settings</DropDownItem>
         </ul>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "../../../components/card/card";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import Spinner from "react-bootstrap/Spinner";
+import Spinner from "../../../components/Spinner/spinner";
 import { login, clearErrors } from "../../../store/actions/auth";
 import "./signin.css";
 import CustomButton from "../../../components/CustomButton/customButton";

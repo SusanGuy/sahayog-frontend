@@ -3,7 +3,7 @@ import Card from "../../../components/card/card";
 import { signup, clearErrors } from "../../../store/actions/auth";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import Spinner from "react-bootstrap/Spinner";
+import Spinner from "../../../components/Spinner/spinner";
 import "./signup.css";
 import CustomButton from "../../../components/CustomButton/customButton";
 import CustomInput from "../../../components/input/input";

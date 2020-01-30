@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import Logout from "./components/logout/logout";
 import { loadUser } from "./store/actions/auth";
 import Aux from "./hoc/Aux/aux";
-import Dashboard from "./containers/dashboard/dashboard";
+import Campaigns from "./containers/campaigns/campaigns";
+import Donations from "./containers/donations/donations";
 import Navigation from "./components/navigation/navigation";
 
 import "./App.css";
@@ -19,9 +20,10 @@ const App = ({ loadUser, isAuthenticated }) => {
   if (isAuthenticated) {
     routes = (
       <Aux>
-        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/my-donations" component={Donations} />
+        <Route exact path="/my-campaigns" component={Campaigns} />
         <Route path="/logout" component={Logout} />
-        <Redirect to="/dashboard" />
+        <Redirect to="/my-campaigns" />
       </Aux>
     );
   } else {
