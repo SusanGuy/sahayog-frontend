@@ -22,10 +22,9 @@ const Signup = ({ error, loading, signup, clearErrors, history }) => {
   }, [clearErrors]);
 
   const handleFormChange = e => {
-
-       if (Object.keys(error).length !== 0) {
-         clearErrors();
-       }
+    if (Object.keys(error).length !== 0) {
+      clearErrors();
+    }
 
     setformData({
       ...formData,
@@ -48,6 +47,7 @@ const Signup = ({ error, loading, signup, clearErrors, history }) => {
           value={name}
           placeholder="Full Name"
           onChange={e => handleFormChange(e)}
+          required
         />
         {error.nameError && <ErrorBox>{error.nameError}!</ErrorBox>}
         <CustomInput
@@ -56,6 +56,7 @@ const Signup = ({ error, loading, signup, clearErrors, history }) => {
           value={email}
           placeholder="Email address"
           onChange={e => handleFormChange(e)}
+          required
         />
         {error.emailError && <ErrorBox>{error.emailError}!</ErrorBox>}
         <CustomInput
@@ -64,6 +65,7 @@ const Signup = ({ error, loading, signup, clearErrors, history }) => {
           value={password}
           placeholder="Password"
           onChange={e => handleFormChange(e)}
+          required
         />
         {error.passwordError && <ErrorBox>{error.passwordError}!</ErrorBox>}
         <CustomInput
@@ -72,6 +74,7 @@ const Signup = ({ error, loading, signup, clearErrors, history }) => {
           value={confirm_password}
           placeholder="Confirm Password"
           onChange={e => handleFormChange(e)}
+          required
         />
 
         <CustomButton type="submit">
