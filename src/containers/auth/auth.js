@@ -1,10 +1,13 @@
 import React from "react";
 import Signin from "./Signin/Signin";
-
+import { connect } from "react-redux";
 import Signup from "./Signup/Signup";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import "./auth.css";
-const auth = ({ match }) => {
+const auth = ({ match, isAuthenticated }) => {
+  if (isAuthenticated) {
+    return <Redirect to="/my-donations" />;
+  }
   return (
     <div className="main-wrapper">
       <section className="auth-container">
@@ -19,4 +22,10 @@ const auth = ({ match }) => {
   );
 };
 
-export default withRouter(auth);
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(auth));

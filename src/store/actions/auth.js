@@ -21,9 +21,9 @@ export const login = (email, password, history) => {
         data: { user, token }
       } = await axios.post("/users/login", submitForm);
       dispatch(authSuccess(token, user));
-      history.push("/my-campaigns");
+      history.push("/my-donations");
     } catch (err) {
-      dispatch(authFail(err.response.data));
+      dispatch(authFail(err.response.data ? err.response.data : err.message));
     }
   };
 };
@@ -44,9 +44,9 @@ export const signup = (name, email, password, confirm_password, history) => {
         data: { user, token }
       } = await axios.post("/users/signup", submitForm);
       dispatch(authSuccess(token, user));
-      history.push("/my-campaigns");
+      history.push("/my-donations");
     } catch (err) {
-      dispatch(authFail(err.response.data));
+      dispatch(authFail(err.response.data ? err.response.data : err.message));
     }
   };
 };
@@ -54,12 +54,11 @@ export const signup = (name, email, password, confirm_password, history) => {
 export const loadUser = () => {
   return async dispatch => {
     try {
-      dispatch(authStart());
       const { data } = await axios.get("/users/me");
 
       dispatch(userLoaded(localStorage.token, data));
     } catch (err) {
-      dispatch(authFail(err.response.data));
+      dispatch(authFail(err.response.data ? err.response.data : err.message));
     }
   };
 };

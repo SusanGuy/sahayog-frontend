@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Auth from "./containers/auth/auth";
 import { Switch, Route, Redirect } from "react-router-dom";
+import PrivateRoute from "./components/routing/privateRoute";
 import { connect } from "react-redux";
 import Logout from "./components/logout/logout";
 import { loadUser } from "./store/actions/auth";
@@ -16,38 +17,24 @@ const App = ({ loadUser, isAuthenticated }) => {
     loadUser();
   }, [loadUser]);
 
-  let routes;
-  if (isAuthenticated) {
-    routes = (
-      <Aux>
-        <Route exact path="/my-donations" component={Donations} />
-        <Route exact path="/my-campaigns" component={Campaigns} />
-        <Route path="/logout" component={Logout} />
-        <Redirect to="/my-campaigns" />
-      </Aux>
-    );
-  } else {
-    routes = (
-      <Aux>
-        <Route path="/auth" component={Auth} />
-        <Route exact path="/" render={() => <p>This is the home page</p>} />
-        <Redirect to="/auth" />
-      </Aux>
-    );
-  }
-
   return (
     <Aux>
       <Navigation />
-      <Switch>{routes}</Switch>
+      <Switch>
+        <PrivateRoute exact path="/my-donations" component={Donations} />
+        <PrivateRoute exact path="/my-campaigns" component={Campaigns} />
+        <PrivateRoute exact path="/logout" component={Logout} />
+        <Route path="/auth" component={Auth} />
+        <Route exact path="/" render={() => <p>This is the home page</p>} />
+      </Switch>
     </Aux>
   );
 };
 
-const maoStateToProps = state => {
+const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.token !== null
   };
 };
 
-export default connect(maoStateToProps, { loadUser })(App);
+export default connect(mapStateToProps, { loadUser })(App);

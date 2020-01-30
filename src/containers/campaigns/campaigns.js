@@ -1,8 +1,26 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getContributions } from "../../store/actions/user";
 import DonationCardBody from "../../components/donation-card-body/DonationCardBody";
-const dashboard = () => {
-  return <DonationCardBody />;
+import Spinner from "../../components/Spinner/spinner";
+const Campaigns = ({ contributions, getContributions, loading, error }) => {
+  useEffect(() => {
+    getContributions();
+  }, [getContributions]);
+
+  if ((contributions.length === 0 && error === null) || loading) {
+    return <Spinner />;
+  }
+
+  return <DonationCardBody campaigns={contributions} />;
 };
 
-export default dashboard;
+const mapStateToProps = state => {
+  return {
+    contributions: state.user.contributions,
+    loading: state.user.loading,
+    error: state.user.error
+  };
+};
+
+export default connect(mapStateToProps, { getContributions })(Campaigns);

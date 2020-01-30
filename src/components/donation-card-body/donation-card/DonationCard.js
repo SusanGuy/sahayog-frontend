@@ -1,16 +1,17 @@
 import React from "react";
 import Aux from "../../../hoc/Aux/aux";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import "./donationCard.css";
 const DonationCard = props => {
   return (
     <div className="user-card-column">
       <div className="user-card-inner">
         {props.new ? (
-          <div class="new-campaign-tile">
-            <div class="new-campaign-tile-body">
-              <Link class="new-campaign-link" to="/create">
-                <div class="new-campaign-logo"></div>
+          <div className="new-campaign-tile">
+            <div className="new-campaign-tile-body">
+              <Link className="new-campaign-link" to="/create">
+                <div className="new-campaign-logo"></div>
                 Start new fundraiser
               </Link>
             </div>
@@ -32,11 +33,10 @@ const DonationCard = props => {
               />
             </div>
             <div className="campaign-action-tile-content">
-              <div className="campaign-action-tile-title">
-                Help Rachana, Atoka shooting victim
-              </div>
+              <div className="campaign-action-tile-title">{props.title}</div>
               <div className="campaign-action-tile-info">
-                $10 donated 18 months ago
+                {props.campaign ? "Posted " : "Donated "}
+                {moment(props.created).fromNow()}
               </div>
             </div>
           </Aux>

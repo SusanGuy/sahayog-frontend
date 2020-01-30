@@ -56,7 +56,11 @@ const Signin = ({ error, loading, login, clearErrors, history }) => {
         />
         {error.passwordError && <ErrorBox>{error.passwordError}!</ErrorBox>}
         <CustomButton type="submit">
-          {loading ? <Spinner animation="border" /> : "Sign in to Sahayog"}
+          {loading ? (
+            <Spinner margin="2px auto" width="2em" height="2em" />
+          ) : (
+            "Sign in to Sahayog"
+          )}
         </CustomButton>
         {error.authError && <ErrorBox>{error.authError}!</ErrorBox>}
       </form>
