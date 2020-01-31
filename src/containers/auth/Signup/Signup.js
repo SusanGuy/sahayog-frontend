@@ -78,7 +78,17 @@ const Signup = ({ error, loading, signup, clearErrors, history }) => {
         />
 
         <CustomButton type="submit">
-          {loading ? <Spinner animation="border" /> : "Sign up to Sahayog"}
+          {loading ? (
+            <Spinner
+              margin="2px auto"
+              width="2em"
+              height="2em"
+              background="inherit"
+              color="white"
+            />
+          ) : (
+            "Sign up to Sahayog"
+          )}
         </CustomButton>
         {error.authError && <ErrorBox>{error.authError}!</ErrorBox>}
       </form>

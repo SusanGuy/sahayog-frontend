@@ -57,7 +57,13 @@ const Signin = ({ error, loading, login, clearErrors, history }) => {
         {error.passwordError && <ErrorBox>{error.passwordError}!</ErrorBox>}
         <CustomButton type="submit">
           {loading ? (
-            <Spinner margin="2px auto" width="2em" height="2em" />
+            <Spinner
+              margin="2px auto"
+              width="2em"
+              height="2em"
+              background="inherit"
+              color="white"
+            />
           ) : (
             "Sign in to Sahayog"
           )}
