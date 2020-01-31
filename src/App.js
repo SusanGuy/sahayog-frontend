@@ -12,7 +12,7 @@ import Navigation from "./components/navigation/navigation";
 
 import "./App.css";
 
-const App = ({ loadUser, isAuthenticated }) => {
+const App = ({ loadUser }) => {
   useEffect(() => {
     loadUser();
   }, [loadUser]);
@@ -31,10 +31,4 @@ const App = ({ loadUser, isAuthenticated }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.auth.token !== null
-  };
-};
-
-export default connect(mapStateToProps, { loadUser })(App);
+export default connect(null, { loadUser })(App);

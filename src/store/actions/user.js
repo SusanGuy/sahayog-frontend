@@ -46,6 +46,7 @@ export const getDonations = () => {
 
       dispatch(donationSuccess(data));
     } catch (err) {
+      console.log(err.response.data);
       dispatch(userError(err.message));
     }
   };
