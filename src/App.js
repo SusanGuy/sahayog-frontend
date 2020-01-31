@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Auth from "./containers/auth/auth";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/routing/privateRoute";
 import { connect } from "react-redux";
 import Logout from "./components/logout/logout";

@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import DonationCardBody from "../../components/donation-card-body/DonationCardBody";
-const donations = () => {
-  return <DonationCardBody />;
+import Spinner from "../../components/Spinner/spinner";
+import { getDonations } from "../../store/actions/user";
+const Donations = ({ getDonations, donations, loading, error }) => {
+  useEffect(() => {
+    getDonations();
+  }, [getDonations]);
+
+  if ((donations.length === 0 && error === null) || loading) {
+    return <Spinner />;
+  }
+  return <DonationCardBody donations={donations} />;
 };
 
-export default donations;
+const mapStateToProps = state => {
+  return {
+    donations: state.user.donations,
+    loading: state.user.loading,
+    error: state.user.error
+  };
+};
+
+export default connect(mapStateToProps, { getDonations })(Donations);

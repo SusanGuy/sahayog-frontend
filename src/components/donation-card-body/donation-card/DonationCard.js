@@ -35,7 +35,7 @@ const DonationCard = props => {
             <div className="campaign-action-tile-content">
               <div className="campaign-action-tile-title">{props.title}</div>
               <div className="campaign-action-tile-info">
-                {props.campaign ? "Posted " : "Donated "}
+                {props.campaign ? "Posted " : `Rs. ${props.amount} donated `}
                 {moment(props.created).fromNow()}
               </div>
             </div>

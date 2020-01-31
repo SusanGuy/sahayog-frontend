@@ -7,10 +7,17 @@ const DonationCardBody = ({ campaigns, donations }) => {
     cards = campaigns.map(({ title, _id, createdAt }) => (
       <DonationCard campaign key={_id} title={title} created={createdAt} />
     ));
+  } else if (donations) {
+    cards = donations.map(({ cause: { title }, _id, amount, date }) => (
+      <DonationCard
+        donation
+        key={_id}
+        title={title}
+        amount={amount}
+        created={date}
+      />
+    ));
   }
-  // } else if (donations) {
-  //   cards = donations.map();
-  // }
 
   return (
     <div className="user-card-container">

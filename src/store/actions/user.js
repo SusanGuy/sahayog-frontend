@@ -44,7 +44,7 @@ export const getDonations = () => {
     try {
       const { data } = await axios.get("/users/me/donations");
 
-      dispatch(contributionSuccess(data));
+      dispatch(donationSuccess(data));
     } catch (err) {
       dispatch(userError(err.message));
     }
