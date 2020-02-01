@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import Image from "../../components/ppImage/ppImage";
 import CustomActionButton from "../../components/custom-action-button/actionButton";
 import "./account.css";
-const account = ({ user: { name, avatar } }) => {
+const account = ({ user }) => {
   return (
     <div className="account-settings-container">
       <div className="account-settings-row">
@@ -35,9 +35,14 @@ const account = ({ user: { name, avatar } }) => {
           <Label>Photo</Label>
           <div className="account-settings-photo">
             <div className="account-settings-avatar">
-              <Image name={name} avatar={avatar} />
+              <Image
+                name={user ? user.name : "user's image"}
+                avatar={user && user.avatar ? user.avatar : null}
+              />
             </div>
-            {avatar && <CustomActionButton>Remove</CustomActionButton>}
+            {user && user.avatar && (
+              <CustomActionButton>Remove</CustomActionButton>
+            )}
           </div>
           <Label>Email</Label>
           <div className="account-settings-input settings-input-email">

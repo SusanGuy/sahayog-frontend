@@ -5,7 +5,7 @@ import "./DropDownMenu.scss";
 import { connect } from "react-redux";
 
 import DropDownItem from "./dropdown-item/dropdownItem";
-const DropDownMenu = ({ user: { name, avatar } }) => {
+const DropDownMenu = ({ user }) => {
   const [hidden, setHidden] = useState(false);
   const node = useRef();
 
@@ -28,7 +28,11 @@ const DropDownMenu = ({ user: { name, avatar } }) => {
       <div className="dropdown">
         <Link className="dropdown-link" to="/my-campaigns">
           <button className="dropdown-button">
-            <Image name={name} avatar={avatar} small />
+            <Image
+              name={user ? user.name : "user's image"}
+              avatar={user && user.avatar ? user.avatar : null}
+              small
+            />
           </button>
         </Link>
         <span ref={node} onClick={() => setHidden(!hidden)} className="caret" />
