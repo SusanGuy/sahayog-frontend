@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Auth from "./containers/auth/auth";
 import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/routing/privateRoute";
+import AccountSetttings from "./containers/account/account";
 import { connect } from "react-redux";
 import Logout from "./components/logout/logout";
 import { loadUser } from "./store/actions/auth";
@@ -21,6 +22,11 @@ const App = ({ loadUser }) => {
     <Aux>
       <Navigation />
       <Switch>
+        <PrivateRoute
+          exact
+          path="/account-settings"
+          component={AccountSetttings}
+        />
         <PrivateRoute exact path="/my-donations" component={Donations} />
         <PrivateRoute exact path="/my-campaigns" component={Campaigns} />
         <PrivateRoute exact path="/logout" component={Logout} />

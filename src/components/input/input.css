@@ -19,3 +19,11 @@
   line-height: 1.5;
   color: #333;
 }
+
+.disabled {
+  width: 98%;
+  color: #333;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  cursor: not-allowed;
+}

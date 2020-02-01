@@ -18,9 +18,9 @@ export const login = (email, password, history) => {
       dispatch(authStart());
       const submitForm = { email, password };
       const {
-        data: { user, token }
+        data: { token }
       } = await axios.post("/users/login", submitForm);
-      dispatch(authSuccess(token, user));
+      dispatch(authSuccess(token));
       dispatch(loadUser());
       history.push("/my-donations");
     } catch (err) {
@@ -42,9 +42,9 @@ export const signup = (name, email, password, confirm_password, history) => {
       dispatch(authStart());
       const submitForm = { name, email, password };
       const {
-        data: { user, token }
+        data: { token }
       } = await axios.post("/users/signup", submitForm);
-      dispatch(authSuccess(token, user));
+      dispatch(authSuccess(token));
       dispatch(loadUser());
       history.push("/my-donations");
     } catch (err) {
@@ -71,10 +71,10 @@ const authStart = () => {
   };
 };
 
-const authSuccess = (token, user) => {
+const authSuccess = token => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    payload: { token, user }
+    payload: { token }
   };
 };
 const authFail = error => {
