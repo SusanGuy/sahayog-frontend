@@ -5,7 +5,7 @@ import Label from "../../components/label/label";
 import { connect } from "react-redux";
 import Image from "../../components/ppImage/ppImage";
 import CustomActionButton from "../../components/custom-action-button/actionButton";
-import "./account.css";
+import "./account.scss";
 const account = ({ user }) => {
   return (
     <div className="account-settings-container">
@@ -35,9 +35,18 @@ const account = ({ user }) => {
           <Label>Photo</Label>
           <div className="account-settings-photo">
             <div className="account-settings-avatar">
+              <span className="over-image">
+                <i class="fas fa-upload"></i>
+              </span>
               <Image
                 name={user ? user.name : "user's image"}
                 avatar={user && user.avatar ? user.avatar : null}
+              />
+              <input
+                type="file"
+                name="upload"
+                className="file-upload"
+                accept="image/*"
               />
             </div>
             {user && user.avatar && (
