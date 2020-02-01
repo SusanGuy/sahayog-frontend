@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Image from "../ppImage/ppImage";
 import "./DropDownMenu.scss";
+import { connect } from "react-redux";
 
 import DropDownItem from "./dropdown-item/dropdownItem";
-const DropDownMenu = ({ user }) => {
+const DropDownMenu = ({ user: { name, avatar } }) => {
   const [hidden, setHidden] = useState(false);
   const node = useRef();
 
@@ -27,7 +28,7 @@ const DropDownMenu = ({ user }) => {
       <div className="dropdown">
         <Link className="dropdown-link" to="/my-campaigns">
           <button className="dropdown-button">
-            <Image small />
+            <Image name={name} avatar={avatar} small />
           </button>
         </Link>
         <span ref={node} onClick={() => setHidden(!hidden)} className="caret" />
@@ -44,4 +45,10 @@ const DropDownMenu = ({ user }) => {
   );
 };
 
-export default DropDownMenu;
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
+export default connect(mapStateToProps)(DropDownMenu);

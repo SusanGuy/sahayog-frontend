@@ -2,10 +2,11 @@ import React from "react";
 import CustomButton from "../../components/CustomButton/customButton";
 import CustomInput from "../../components/input/input";
 import Label from "../../components/label/label";
+import { connect } from "react-redux";
 import Image from "../../components/ppImage/ppImage";
 import CustomActionButton from "../../components/custom-action-button/actionButton";
 import "./account.css";
-const account = () => {
+const account = ({ user: { name, avatar } }) => {
   return (
     <div className="account-settings-container">
       <div className="account-settings-row">
@@ -34,9 +35,9 @@ const account = () => {
           <Label>Photo</Label>
           <div className="account-settings-photo">
             <div className="account-settings-avatar">
-              <Image />
+              <Image name={name} avatar={avatar} />
             </div>
-            <CustomActionButton>Remove</CustomActionButton>
+            {avatar && <CustomActionButton>Remove</CustomActionButton>}
           </div>
           <Label>Email</Label>
           <div className="account-settings-input settings-input-email">
@@ -70,4 +71,10 @@ const account = () => {
   );
 };
 
-export default account;
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
+export default connect(mapStateToProps)(account);
