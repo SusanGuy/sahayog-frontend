@@ -20,6 +20,21 @@ export const deleteImage = () => {
   };
 };
 
+export const updateForm = email => {
+  return async dispatch => {
+    try {
+      dispatch(authStart());
+
+      const submitForm = { email };
+
+      await axios.patch("/users/me", submitForm);
+      dispatch(loadUser());
+    } catch (err) {
+      dispatch(authFail(err.response ? err.response.data : err.message));
+    }
+  };
+};
+
 export const uploadImage = image => {
   return async dispatch => {
     try {

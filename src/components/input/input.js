@@ -1,13 +1,13 @@
 import React from "react";
 import "./input.css";
-const input = ({ disabled, ...rest }) => {
+const input = ({ ...props }) => {
   const classes = ["custom-input"];
-  if (disabled) {
+  if (props.disabled) {
     classes.push("disabled");
   }
   return (
     <div className="zoom-field-wrapper">
-      <input className={classes.join(" ")} {...rest} />
+      <input className={classes.join(" ")} {...props} />
     </div>
   );
 };
