@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import Auth from "./containers/auth/auth";
+
 import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/routing/privateRoute";
 import AccountSetttings from "./containers/account/account";
+import { setAuthToken } from "./utils";
 import { connect } from "react-redux";
 import Logout from "./components/logout/logout";
 import { loadUser } from "./store/actions/auth";
@@ -12,6 +14,10 @@ import Donations from "./containers/donations/donations";
 import Navigation from "./components/navigation/navigation";
 
 import "./App.css";
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 const App = ({ loadUser }) => {
   useEffect(() => {

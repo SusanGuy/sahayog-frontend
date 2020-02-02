@@ -1,7 +1,7 @@
 .account-settings-container {
   padding: 2.8125rem 4.6875rem;
   margin: 3.5rem auto 0 auto;
-  max-width: 40.5rem;
+  max-width: 48.5rem;
   background: #fff;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
   position: relative;
@@ -48,8 +48,8 @@
   width: 5.625rem;
   float: left;
   cursor: pointer;
-  margin-right: 12px;
   position: relative;
+  margin-right: 16px;
 }
 
 .over-image {
@@ -73,6 +73,7 @@
   bottom: 40px;
   left: 12px;
   cursor: pointer;
+  width: 50%;
   opacity: 0;
 }
 

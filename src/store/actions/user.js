@@ -34,7 +34,7 @@ export const getContributions = () => {
 
       dispatch(contributionSuccess(data));
     } catch (err) {
-      dispatch(userError(err.message));
+      dispatch(userError(err.response ? err.response.data : err.message));
     }
   };
 };
@@ -46,8 +46,7 @@ export const getDonations = () => {
 
       dispatch(donationSuccess(data));
     } catch (err) {
-      console.log(err.response.data);
-      dispatch(userError(err.message));
+      dispatch(userError(err.response ? err.response.data : err.message));
     }
   };
 };

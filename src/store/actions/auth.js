@@ -8,6 +8,32 @@ const userLoaded = (token, user) => {
   };
 };
 
+export const deleteImage = () => {
+  return async dispatch => {
+    try {
+      dispatch(authStart());
+      await axios.delete("/users/me/avatar");
+      dispatch(loadUser());
+    } catch (err) {
+      dispatch(authFail(err.response ? err.response.data : err.message));
+    }
+  };
+};
+
+export const uploadImage = image => {
+  return async dispatch => {
+    try {
+      dispatch(authStart());
+      const fd = new FormData();
+      fd.append("upload", image, image.name);
+      await axios.post("/users/me/avatar", fd);
+      dispatch(loadUser());
+    } catch (err) {
+      dispatch(authFail(err.response ? err.response.data : err.message));
+    }
+  };
+};
+
 export const clearErrors = () => {
   return { type: actionTypes.CLEAR_ERRORS };
 };
@@ -24,7 +50,7 @@ export const login = (email, password, history) => {
       dispatch(loadUser());
       history.push("/my-donations");
     } catch (err) {
-      dispatch(authFail(err.response.data ? err.response.data : err.message));
+      dispatch(authFail(err.response ? err.response.data : err.message));
     }
   };
 };
@@ -48,7 +74,7 @@ export const signup = (name, email, password, confirm_password, history) => {
       dispatch(loadUser());
       history.push("/my-donations");
     } catch (err) {
-      dispatch(authFail(err.response.data ? err.response.data : err.message));
+      dispatch(authFail(err.response ? err.response.data : err.message));
     }
   };
 };
@@ -56,11 +82,11 @@ export const signup = (name, email, password, confirm_password, history) => {
 export const loadUser = () => {
   return async dispatch => {
     try {
-      setAuthToken(localStorage.token, axios);
+      setAuthToken(localStorage.token);
       const { data } = await axios.get("/users/me");
       dispatch(userLoaded(localStorage.token, data));
     } catch (err) {
-      dispatch(authFail(err.response.data ? err.response.data : err.message));
+      dispatch(authFail(err.response ? err.response.data : err.message));
     }
   };
 };
