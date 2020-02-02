@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomButton from "../../components/CustomButton/customButton";
 import CustomInput from "../../components/input/input";
 import Label from "../../components/label/label";
 import { connect } from "react-redux";
-import { uploadImage, deleteImage } from "../../store/actions/auth";
+import {
+  uploadImage,
+  deleteImage,
+  clearErrors
+} from "../../store/actions/auth";
 import Image from "../../components/ppImage/ppImage";
 import CustomActionButton from "../../components/custom-action-button/actionButton";
 import Spinner from "../../components/Spinner/spinner";
 import ErrorBox from "../../components/errorMessage/errorMessage";
 import "./account.scss";
 
-const account = ({ user, uploadImage, loading, deleteImage, error }) => {
+const Account = ({
+  user,
+  uploadImage,
+  loading,
+  deleteImage,
+  error,
+  clearErrors
+}) => {
+  useEffect(() => {
+    clearErrors();
+  }, [clearErrors]);
   return (
     <div className="account-settings-container">
       <div className="account-settings-row">
@@ -119,4 +133,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { uploadImage, deleteImage })(account);
+export default connect(mapStateToProps, {
+  uploadImage,
+  deleteImage,
+  clearErrors
+})(Account);
