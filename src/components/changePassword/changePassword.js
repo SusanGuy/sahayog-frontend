@@ -1,8 +1,10 @@
 import React, { useRef, useEffect } from "react";
 import "./changePassword.css";
 import CustomInput from "../input/input";
+import { connect } from "react-redux";
+import { hideModal } from "../../store/actions/ui";
 import CustomButton from "../CustomButton/customButton";
-const ChangePassword = () => {
+const ChangePassword = ({ hideModal }) => {
   const node = useRef();
 
   useEffect(() => {
@@ -16,6 +18,7 @@ const ChangePassword = () => {
     if (node.current.contains(e.target)) {
       return;
     }
+    hideModal();
   };
 
   return (
@@ -23,7 +26,15 @@ const ChangePassword = () => {
       <div ref={node} className="password-change-modal">
         <div className="password-modal-header">
           <div className="overlay-header">Set your password</div>
-          <button className="close-button">+</button>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              hideModal();
+            }}
+            className="close-button"
+          >
+            +
+          </button>
         </div>
         <div className="password-change-content">
           <div className="password-form-header">
@@ -64,4 +75,4 @@ const ChangePassword = () => {
   );
 };
 
-export default ChangePassword;
+export default connect(null, { hideModal })(ChangePassword);
