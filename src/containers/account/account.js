@@ -13,6 +13,7 @@ import Image from "../../components/ppImage/ppImage";
 import CustomActionButton from "../../components/custom-action-button/actionButton";
 import Spinner from "../../components/Spinner/spinner";
 import ErrorBox from "../../components/errorMessage/errorMessage";
+import PasswordModal from "../../components/changePassword/changePassword";
 import "./account.scss";
 
 const Account = ({
@@ -29,6 +30,8 @@ const Account = ({
     last_name: "",
     email: ""
   });
+
+  const [changePassword, toggleChangePassword] = useState(false);
 
   useEffect(() => {
     clearErrors();
@@ -58,6 +61,7 @@ const Account = ({
 
   return (
     <div className="account-settings-container">
+      {changePassword === true && <PasswordModal />}
       <div className="account-settings-row">
         <form onSubmit={e => handleSubmit(e)}>
           <Label>Full Name</Label>
@@ -131,7 +135,14 @@ const Account = ({
           {error.emailError && <ErrorBox>{error.emailError}!</ErrorBox>}
           <Label>Password</Label>
           <div className="account-settings-password">
-            <CustomActionButton>Change</CustomActionButton>
+            <CustomActionButton
+              onClick={e => {
+                e.preventDefault();
+                toggleChangePassword(!changePassword);
+              }}
+            >
+              Change
+            </CustomActionButton>
           </div>
           <div className="dotted-line"></div>
           <div className="delete-account-row">
