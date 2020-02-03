@@ -74,9 +74,8 @@ const Signup = ({ error, loading, signup, clearErrors, history }) => {
           value={confirm_password}
           placeholder="Confirm Password"
           onChange={e => handleFormChange(e)}
-          required
         />
-
+        {error.confirmError && <ErrorBox>{error.confirmError}!</ErrorBox>}
         <CustomButton type="submit">
           {loading ? (
             <Spinner

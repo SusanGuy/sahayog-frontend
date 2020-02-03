@@ -56,7 +56,7 @@ const Account = ({
     updateForm(email);
   };
 
-  if (loading || !user) {
+  if ((loading || !user) && !hidden) {
     return <Spinner />;
   }
 

@@ -51,6 +51,7 @@ const authReducer = (state = initialState, action) => {
     case actionTypes.CLEAR_ERRORS:
       return {
         ...state,
+        loading: false,
         error: {}
       };
     default:

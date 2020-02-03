@@ -1,6 +1,7 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
 import { setAuthToken } from "../../utils";
+import { hideModal } from "../actions/ui";
 const userLoaded = (token, user) => {
   return {
     type: actionTypes.USER_LOADED,
@@ -72,6 +73,13 @@ export const login = (email, password, history) => {
 
 export const signup = (name, email, password, confirm_password, history) => {
   return async dispatch => {
+    if (confirm_password === "") {
+      return dispatch(
+        authFail({
+          confirmError: "Please enter the password again"
+        })
+      );
+    }
     if (password !== "" && password !== confirm_password) {
       return dispatch(
         authFail({
@@ -88,6 +96,36 @@ export const signup = (name, email, password, confirm_password, history) => {
       dispatch(authSuccess(token));
       dispatch(loadUser());
       history.push("/my-donations");
+    } catch (err) {
+      dispatch(authFail(err.response ? err.response.data : err.message));
+    }
+  };
+};
+
+export const changePassword = (oldPassword, new_password, confirm_password) => {
+  return async dispatch => {
+    if (oldPassword !== "") {
+      if (new_password !== "" && confirm_password === "") {
+        return dispatch(
+          authFail({
+            confirmError: "Please enter the password again"
+          })
+        );
+      }
+      if (new_password !== confirm_password) {
+        return dispatch(
+          authFail({
+            authError: "Passwords donot match"
+          })
+        );
+      }
+    }
+    try {
+      dispatch(authStart());
+      const submitForm = { password: oldPassword, new_password };
+      await axios.patch("/users/me/changePassword", submitForm);
+      dispatch(signout());
+      dispatch(hideModal());
     } catch (err) {
       dispatch(authFail(err.response ? err.response.data : err.message));
     }

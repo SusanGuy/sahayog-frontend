@@ -1,24 +1,57 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./changePassword.css";
 import CustomInput from "../input/input";
+import { clearErrors, changePassword } from "../../store/actions/auth";
 import { connect } from "react-redux";
 import { hideModal } from "../../store/actions/ui";
 import CustomButton from "../CustomButton/customButton";
-const ChangePassword = ({ hideModal }) => {
+import Spinner from "../Spinner/spinner";
+
+import ErrorBox from "../errorMessage/errorMessage";
+const ChangePassword = ({
+  hideModal,
+  changePassword,
+  loading,
+  error,
+  clearErrors
+}) => {
   const node = useRef();
 
+  const [formData, setFormData] = useState({
+    current_password: "",
+    new_password: "",
+    confirm_new_password: ""
+  });
+
   useEffect(() => {
+    clearErrors();
     document.addEventListener("click", handleClick);
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [clearErrors]);
 
   const handleClick = e => {
     if (node.current.contains(e.target)) {
       return;
     }
     hideModal();
+  };
+
+  const { current_password, new_password, confirm_new_password } = formData;
+  const handleChange = e => {
+    if (Object.keys(error).length !== 0) {
+      clearErrors();
+    }
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    changePassword(current_password, new_password, confirm_new_password);
   };
 
   return (
@@ -43,31 +76,52 @@ const ChangePassword = ({ hideModal }) => {
             </strong>
           </div>
 
-          <form>
+          <form onSubmit={e => handleSubmit(e)}>
             <CustomInput
               name="current_password"
               type="password"
               placeholder="Current Password"
-              value=""
+              value={current_password}
+              onChange={e => handleChange(e)}
+              required
             />
+            {error.passwordError && <ErrorBox>{error.passwordError}!</ErrorBox>}
             <CustomInput
               name="new_password"
               type="password"
               placeholder="New Password"
-              value=""
+              value={new_password}
+              onChange={e => handleChange(e)}
+              required
             />
-
+            {error.newPasswordError && (
+              <ErrorBox>{error.newPasswordError}!</ErrorBox>
+            )}
             <CustomInput
               name="confirm_new_password"
               type="password"
               placeholder="Confirm New Password"
-              value=""
+              value={confirm_new_password}
+              onChange={e => handleChange(e)}
+              required
             />
+            {error.confirmError && <ErrorBox>{error.confirmError}!</ErrorBox>}
             <div className="change-password-button">
               <CustomButton width="80%" type="submit">
-                Save Changes
+                {loading ? (
+                  <Spinner
+                    margin="2px auto"
+                    width="2em"
+                    height="2em"
+                    background="inherit"
+                    color="white"
+                  />
+                ) : (
+                  "Save Changes"
+                )}
               </CustomButton>
             </div>
+            {error.authError && <ErrorBox>{error.authError}!</ErrorBox>}
           </form>
         </div>
       </div>
@@ -75,4 +129,15 @@ const ChangePassword = ({ hideModal }) => {
   );
 };
 
-export default connect(null, { hideModal })(ChangePassword);
+const mapStateToProps = state => {
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error
+  };
+};
+
+export default connect(mapStateToProps, {
+  hideModal,
+  clearErrors,
+  changePassword
+})(ChangePassword);
