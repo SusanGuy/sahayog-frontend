@@ -4,6 +4,7 @@ import CustomInput from "../../components/input/input";
 import Label from "../../components/label/label";
 import { showModal } from "../../store/actions/ui";
 import { connect } from "react-redux";
+import Aux from "../../hoc/Aux/aux";
 import {
   uploadImage,
   deleteImage,
@@ -61,109 +62,111 @@ const Account = ({
   }
 
   return (
-    <div className="account-settings-container">
+    <Aux>
       {hidden && <PasswordModal />}
-      <div className="account-settings-row">
-        <form onSubmit={e => handleSubmit(e)}>
-          <Label>Full Name</Label>
-          <div className="account-settings-input">
-            <div className="input-row">
-              <div className="input-column">
-                <CustomInput
-                  name="first_name"
-                  type="text"
-                  placeholder="First Name"
-                  value={first_name}
-                  onChange={e => handleChange(e)}
-                  disabled
-                />
-              </div>
-              <div className="input-column">
-                <CustomInput
-                  name="last_name"
-                  type="text"
-                  placeholder="Last Name"
-                  value={last_name}
-                  disabled
-                  onChange={e => handleChange(e)}
-                />
+      <div className="account-settings-container">
+        <div className="account-settings-row">
+          <form onSubmit={e => handleSubmit(e)}>
+            <Label>Full Name</Label>
+            <div className="account-settings-input">
+              <div className="input-row">
+                <div className="input-column">
+                  <CustomInput
+                    name="first_name"
+                    type="text"
+                    placeholder="First Name"
+                    value={first_name}
+                    onChange={e => handleChange(e)}
+                    disabled
+                  />
+                </div>
+                <div className="input-column">
+                  <CustomInput
+                    name="last_name"
+                    type="text"
+                    placeholder="Last Name"
+                    value={last_name}
+                    disabled
+                    onChange={e => handleChange(e)}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <Label>Photo</Label>
-          <div className="account-settings-photo">
-            <div className="account-settings-avatar">
-              <span className="over-image">
-                <i className="fas fa-upload"></i>
-              </span>
-              <Image
-                name={user.name ? user.name : "user's image"}
-                avatar={user.avatar ? user.avatar : null}
-              />
+            <Label>Photo</Label>
+            <div className="account-settings-photo">
+              <div className="account-settings-avatar">
+                <span className="over-image">
+                  <i className="fas fa-upload"></i>
+                </span>
+                <Image
+                  name={user.name ? user.name : "user's image"}
+                  avatar={user.avatar ? user.avatar : null}
+                />
 
-              <input
-                type="file"
-                onChange={e => uploadImage(e.target.files[0])}
-                name="upload"
-                className="file-upload"
-                accept="image/*"
+                <input
+                  type="file"
+                  onChange={e => uploadImage(e.target.files[0])}
+                  name="upload"
+                  className="file-upload"
+                  accept="image/*"
+                />
+              </div>
+              {user.avatar && (
+                <CustomActionButton
+                  remove
+                  onClick={e => {
+                    e.preventDefault();
+                    deleteImage();
+                  }}
+                >
+                  Remove
+                </CustomActionButton>
+              )}
+            </div>
+            {error.errMessage && <ErrorBox>{error.errMessage}!</ErrorBox>}
+            <Label>Email</Label>
+            <div className="account-settings-input settings-input-email">
+              <CustomInput
+                name="email"
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={e => handleChange(e)}
+                required
               />
             </div>
-            {user.avatar && (
+            {error.emailError && <ErrorBox>{error.emailError}!</ErrorBox>}
+            <Label>Password</Label>
+            <div className="account-settings-password">
               <CustomActionButton
-                remove
                 onClick={e => {
                   e.preventDefault();
-                  deleteImage();
+                  showModal();
                 }}
               >
-                Remove
+                Change
               </CustomActionButton>
-            )}
-          </div>
-          {error.errMessage && <ErrorBox>{error.errMessage}!</ErrorBox>}
-          <Label>Email</Label>
-          <div className="account-settings-input settings-input-email">
-            <CustomInput
-              name="email"
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={e => handleChange(e)}
-              required
-            />
-          </div>
-          {error.emailError && <ErrorBox>{error.emailError}!</ErrorBox>}
-          <Label>Password</Label>
-          <div className="account-settings-password">
-            <CustomActionButton
-              onClick={e => {
-                e.preventDefault();
-                showModal();
-              }}
-            >
-              Change
-            </CustomActionButton>
-          </div>
-          <div className="dotted-line"></div>
-          <div className="delete-account-row">
-            <div className="delete-account-description">
-              Deleting your account will remove all of your activity and
-              campaigns, and you will no longer be able to sign in with this
-              account.
             </div>
-            <div className="delete-account-button">
-              <CustomActionButton remove>Delete Account</CustomActionButton>
+            <div className="dotted-line"></div>
+            <div className="delete-account-row">
+              <div className="delete-account-description">
+                Deleting your account will remove all of your activity and
+                campaigns, and you will no longer be able to sign in with this
+                account.
+              </div>
+              <div className="delete-account-button">
+                <CustomActionButton remove>Delete Account</CustomActionButton>
+              </div>
             </div>
-          </div>
-          <div className="save-changes-button">
-            <CustomButton type="submit" width="50%">
-              Save Changes
-            </CustomButton>
-          </div>
-        </form>
+            <div className="save-changes-button">
+              <CustomButton type="submit" width="50%">
+                Save Changes
+              </CustomButton>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </Aux>
   );
 };
 

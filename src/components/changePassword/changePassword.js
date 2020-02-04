@@ -13,7 +13,8 @@ const ChangePassword = ({
   changePassword,
   loading,
   error,
-  clearErrors
+  clearErrors,
+  hidden
 }) => {
   const node = useRef();
 
@@ -25,11 +26,15 @@ const ChangePassword = ({
 
   useEffect(() => {
     clearErrors();
+    if (hidden) {
+      document.body.style.overflow = "hidden";
+    }
     document.addEventListener("click", handleClick);
     return () => {
       document.removeEventListener("click", handleClick);
+      document.body.style.overflow = "unset";
     };
-  }, [clearErrors]);
+  }, [clearErrors, hidden]);
 
   const handleClick = e => {
     if (node.current.contains(e.target)) {
@@ -132,7 +137,8 @@ const ChangePassword = ({
 const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
-    error: state.auth.error
+    error: state.auth.error,
+    hidden: state.modal.hidden
   };
 };
 
