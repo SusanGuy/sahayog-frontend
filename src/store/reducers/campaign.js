@@ -3,6 +3,7 @@ const initialState = {
   loading: false,
   campaignStarted: false,
   title: "",
+  goal: 0,
   description: "",
   error: {}
 };
@@ -33,7 +34,6 @@ const campaignReducer = (state = initialState, action) => {
     case actionTypes.CLEAR_ERRORS:
       return {
         ...state,
-        campaignStarted: false,
         error: {}
       };
     default:

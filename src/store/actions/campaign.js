@@ -21,13 +21,13 @@ export const startCampaign = (goal, title, description, history, match) => {
     return campaignError(validationErrors);
   }
   history.push(`${match.url}/media`);
-  return campaignStarted(title, description);
+  return campaignStarted(goal, title, description);
 };
 
-const campaignStarted = (title, description) => {
+const campaignStarted = (goal, title, description) => {
   return {
     type: actionTypes.START_CAMPAIGN,
-    payload: { title, description }
+    payload: { goal, title, description }
   };
 };
 

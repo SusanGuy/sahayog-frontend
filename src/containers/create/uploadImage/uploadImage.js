@@ -1,9 +1,13 @@
 import React from "react";
 import "./uploadImage.css";
-import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter, Redirect } from "react-router-dom";
 import CustomButton from "../../../components/CustomButton/customButton";
 import BottomLink from "../../../components/custom-action-button/actionButton";
-const uploadImage = ({ history }) => {
+const uploadImage = ({ history, campaignStarted }) => {
+  if (!campaignStarted) {
+    return <Redirect to="/sahayog" />;
+  }
   return (
     <div className="image-upload-row">
       <div className="image-upload-column">
@@ -60,4 +64,10 @@ const uploadImage = ({ history }) => {
   );
 };
 
-export default withRouter(uploadImage);
+const mapStateToProps = state => {
+  return {
+    campaignStarted: state.campaign.campaignStarted
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(uploadImage));

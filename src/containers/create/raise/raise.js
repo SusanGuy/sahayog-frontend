@@ -15,7 +15,11 @@ const Raise = ({
   match,
   startCampaign,
   error,
-  clearErrors
+  clearErrors,
+  loadedGoal,
+  loadedTitle,
+  loadedDescription,
+  campaignStarted
 }) => {
   const [formData, setFormData] = useState({
     goal: "",
@@ -26,7 +30,20 @@ const Raise = ({
 
   useEffect(() => {
     clearErrors();
-  }, [clearErrors]);
+    if (campaignStarted) {
+      setFormData({
+        goal: loadedGoal === 0 ? "" : loadedGoal,
+        title: loadedTitle === "" ? "" : loadedTitle,
+        description: loadedDescription === "" ? "" : loadedDescription
+      });
+    }
+  }, [
+    clearErrors,
+    campaignStarted,
+    loadedGoal,
+    loadedTitle,
+    loadedDescription
+  ]);
 
   const handleChange = e => {
     if (Object.keys(error).length !== 0) {
@@ -105,7 +122,7 @@ const Raise = ({
                 <div>
                   <span className="agreement">
                     The platform is free for organizers. Transaction fee is 2.9%
-                    plus $0.30 per donation. By continuing, you agree to the
+                    plus Rs.30 per donation. By continuing, you agree to the
                     GoFundMe <CustomActionButton>terms</CustomActionButton> and
                     acknowledge receipt of our{" "}
                     <CustomActionButton>privacy policy </CustomActionButton>
@@ -129,7 +146,10 @@ const Raise = ({
 const mapStateToProps = state => {
   return {
     error: state.campaign.error,
-    campaign: state.campaign
+    campaignStarted: state.campaign.campaignStarted,
+    loadedGoal: state.campaign.goal,
+    loadedTitle: state.campaign.title,
+    loadedDescription: state.campaign.description
   };
 };
 
