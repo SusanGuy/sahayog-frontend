@@ -1,64 +1,120 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CustomButton from "../../../components/CustomButton/customButton";
 import { withRouter } from "react-router-dom";
 import CustomInput from "../../../components/input/input";
 import CustomActionButton from "../../../components/custom-action-button/actionButton";
+import { connect } from "react-redux";
+import { clearErrors } from "../../../store/actions/auth";
+import ErrorBox from "../../../components/errorMessage/errorMessage";
+import { startCampaign } from "../../../store/actions/campaign";
 import "./raise.css";
-const raise = ({ history, match }) => {
+
+const Raise = ({
+  campaign,
+  history,
+  match,
+  startCampaign,
+  error,
+  clearErrors
+}) => {
+  const [formData, setFormData] = useState({
+    goal: "",
+    title: "",
+    description: ""
+  });
+  const { goal, title, description } = formData;
+
+  useEffect(() => {
+    clearErrors();
+  }, [clearErrors]);
+
+  const handleChange = e => {
+    if (Object.keys(error).length !== 0) {
+      clearErrors();
+    }
+    if (e.target.name === "goal") {
+      const re = /^[0-9\b]+$/;
+      return e.target.value === "" || re.test(e.target.value)
+        ? setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+          })
+        : null;
+    }
+
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+  const handleNext = e => {
+    e.preventDefault();
+    startCampaign(goal, title, description, history, match);
+  };
   return (
     <div className="create-fundraiser-container">
       <div className="create-fundraiser-row">
         <div className="create-fundraiser-card">
           <h1 className="fundraiser-card-title">Enter your goal here</h1>
-          <div className="fundraiser-amount-row">
-            <div className="fundraiser-amount-column">
-              <div className="amount-contain">
-                <div className="currency-symbol">रू</div>
-                <input
-                  type="tel"
-                  className="amount-input"
-                  name="goal-amount"
-                  value=""
-                  placeholder="1000"
-                />
+          <form onSubmit={e => handleNext(e)}>
+            <div className="fundraiser-amount-row">
+              <div className="fundraiser-amount-column">
+                <div className="amount-contain">
+                  <div className="currency-symbol">रू</div>
+                  <input
+                    type="tel"
+                    className="amount-input"
+                    name="goal"
+                    value={goal}
+                    onChange={e => handleChange(e)}
+                    placeholder="1000"
+                    required
+                  />
+                </div>
+                <ErrorBox>{error.goalError}</ErrorBox>
               </div>
             </div>
-          </div>
-          <div className="new-fundraiser-row">
-            <div className="new-fundraiser-column">
-              <div className="countdown-contain">
-                <CustomInput
-                  type="text"
-                  value=""
-                  name="fund-name"
-                  placeholder="Campaign title"
-                />
-                <div className="countdown-number">50</div>
-              </div>
 
-              <div className="countdown-contain">
-                <CustomInput
-                  type="text"
-                  textarea
-                  value=""
-                  name="fund-name"
-                  placeholder="Campaign Description"
-                />
+            <div className="new-fundraiser-row">
+              <div className="new-fundraiser-column">
+                <div className="countdown-contain">
+                  <CustomInput
+                    type="text"
+                    value={title}
+                    name="title"
+                    onChange={e => handleChange(e)}
+                    placeholder="Campaign title"
+                    required
+                  />
+                  <div className="countdown-number"></div>
+                  <ErrorBox>{error.titleError}</ErrorBox>
+                </div>
+
+                <div className="countdown-contain">
+                  <CustomInput
+                    type="text"
+                    textarea
+                    value={description}
+                    name="description"
+                    onChange={e => handleChange(e)}
+                    placeholder="Campaign Description"
+                    required
+                  />
+                  <ErrorBox>{error.descriptionError}</ErrorBox>
+                </div>
+                <div>
+                  <span className="agreement">
+                    The platform is free for organizers. Transaction fee is 2.9%
+                    plus $0.30 per donation. By continuing, you agree to the
+                    GoFundMe <CustomActionButton>terms</CustomActionButton> and
+                    acknowledge receipt of our{" "}
+                    <CustomActionButton>privacy policy </CustomActionButton>
+                  </span>
+                </div>
+                <CustomButton type="submit">Next</CustomButton>
               </div>
-              <div>
-                <span className="agreement">
-                  The platform is free for organizers. Transaction fee is 2.9%
-                  plus $0.30 per donation. By continuing, you agree to the
-                  GoFundMe <CustomActionButton>terms</CustomActionButton> and
-                  acknowledge receipt of our{" "}
-                  <CustomActionButton>privacy policy </CustomActionButton>
-                </span>
-              </div>
-              <CustomButton onClick={e => history.push(`${match.path}/media`)}>
-                Next
-              </CustomButton>
             </div>
-          </div>
+          </form>
         </div>
         <div className="bottom-link">
           <div className="text-under-card ">
@@ -70,4 +126,13 @@ const raise = ({ history, match }) => {
   );
 };
 
-export default withRouter(raise);
+const mapStateToProps = state => {
+  return {
+    error: state.campaign.error,
+    campaign: state.campaign
+  };
+};
+
+export default connect(mapStateToProps, { startCampaign, clearErrors })(
+  withRouter(Raise)
+);
