@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Auth from "./containers/auth/auth";
-import Raise from "./containers/raise/raise";
+import Create from "./containers/create/create";
 import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/routing/privateRoute";
 import AccountSetttings from "./containers/account/account";
@@ -28,7 +28,7 @@ const App = ({ loadUser }) => {
     <Aux>
       <Navigation />
       <Switch>
-        <Route exact path="/sahayog" component={Raise} />
+        <PrivateRoute path="/sahayog" component={Create} />
         <PrivateRoute
           exact
           path="/account-settings"

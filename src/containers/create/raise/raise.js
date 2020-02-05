@@ -1,7 +1,8 @@
 import React from "react";
-import CustomButton from "../../components/CustomButton/customButton";
-import CustomInput from "../../components/input/input";
-import CustomActionButton from "../../components/custom-action-button/actionButton";
+import CustomButton from "../../../components/CustomButton/customButton";
+
+import CustomInput from "../../../components/input/input";
+import CustomActionButton from "../../../components/custom-action-button/actionButton";
 import "./raise.css";
 const raise = () => {
   return (
@@ -13,7 +14,6 @@ const raise = () => {
             <div className="fundraiser-amount-column">
               <div className="amount-contain">
                 <div className="currency-symbol">रू</div>
-
                 <input
                   type="tel"
                   className="amount-input"
@@ -33,7 +33,7 @@ const raise = () => {
                   name="fund-name"
                   placeholder="Campaign title"
                 />
-                <div className="countdown-number">5</div>
+                <div className="countdown-number">50</div>
               </div>
 
               <div className="countdown-contain">
@@ -44,7 +44,6 @@ const raise = () => {
                   name="fund-name"
                   placeholder="Campaign Description"
                 />
-                <div className="countdown-number">100</div>
               </div>
               <div>
                 <span className="agreement">

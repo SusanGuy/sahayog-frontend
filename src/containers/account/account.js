@@ -94,7 +94,10 @@ const Account = ({
             </div>
             <Label>Photo</Label>
             <div className="account-settings-photo">
-              <div className="account-settings-avatar">
+              <div
+                onClick={() => document.getElementById("chooseFile").click()}
+                className="account-settings-avatar"
+              >
                 <span className="over-image">
                   <i className="fas fa-upload"></i>
                 </span>
@@ -104,6 +107,7 @@ const Account = ({
                 />
 
                 <input
+                  id="chooseFile"
                   type="file"
                   onChange={e => uploadImage(e.target.files[0])}
                   name="upload"

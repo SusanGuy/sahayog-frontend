@@ -9,10 +9,12 @@ import thunk from "redux-thunk";
 import authReducer from "./store/reducers/auth";
 import userReducer from "./store/reducers/user";
 import uiReducer from "./store/reducers/ui";
+import campaignReducer from "./store/reducers/campaign";
 const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
-  modal: uiReducer
+  modal: uiReducer,
+  campaign: campaignReducer
 });
 
 const composeEnhancers =
