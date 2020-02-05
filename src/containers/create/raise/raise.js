@@ -1,10 +1,10 @@
 import React from "react";
 import CustomButton from "../../../components/CustomButton/customButton";
-
+import { withRouter } from "react-router-dom";
 import CustomInput from "../../../components/input/input";
 import CustomActionButton from "../../../components/custom-action-button/actionButton";
 import "./raise.css";
-const raise = () => {
+const raise = ({ history, match }) => {
   return (
     <div className="create-fundraiser-container">
       <div className="create-fundraiser-row">
@@ -54,7 +54,9 @@ const raise = () => {
                   <CustomActionButton>privacy policy </CustomActionButton>
                 </span>
               </div>
-              <CustomButton>Next</CustomButton>
+              <CustomButton onClick={e => history.push(`${match.path}/media`)}>
+                Next
+              </CustomButton>
             </div>
           </div>
         </div>
@@ -68,4 +70,4 @@ const raise = () => {
   );
 };
 
-export default raise;
+export default withRouter(raise);
