@@ -27,3 +27,7 @@
   border: 1px solid #ddd;
   cursor: not-allowed;
 }
+
+.textarea {
+  height: 307px;
+}

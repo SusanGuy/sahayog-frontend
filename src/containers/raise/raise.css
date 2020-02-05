@@ -1,0 +1,154 @@
+.create-fundraiser-container {
+  max-width: 70rem;
+  position: relative;
+  margin: 3.5rem auto 0 auto;
+}
+
+.create-fundraiser-row {
+  float: left;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  margin-left: 15.33333%;
+  width: 58.33333%;
+}
+
+.create-fundraiser-card {
+  box-shadow: 0 0.5rem 1.5rem 0 rgba(0, 0, 0, 0.1);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1.5rem;
+  min-height: auto;
+  font-size: 1rem;
+  padding-top: 1.25rem;
+  border-radius: 4px;
+  z-index: auto;
+  background: #fff;
+  position: relative;
+}
+
+.fundraiser-card-title {
+  font-weight: 900;
+  font-size: 1.75rem;
+  margin-bottom: 1.625rem;
+  position: relative;
+  text-align: center;
+  line-height: 1.4;
+  margin-top: 0;
+  font-family: inherit;
+}
+
+.fundraiser-amount-row {
+  background-color: #fbf8f6;
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+  margin-bottom: 1.5rem !important;
+  max-width: 60rem;
+}
+
+.fundraiser-amount-column {
+  float: none;
+  margin-right: auto;
+  margin-left: auto;
+  width: 83.33333%;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.amount-contain {
+  background-color: #fbf8f6;
+  color: #15c7c7;
+  font-size: 3.125rem;
+  font-weight: 900;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.currency-symbol {
+  margin-left: 30px;
+  margin-right: auto;
+  margin-top: 0.8375rem;
+  margin-bottom: auto;
+  font-size: 3.125rem;
+}
+
+.amount-input {
+  color: #15c7c7;
+  margin-top: 0.4375rem;
+  height: 4.6875rem;
+  font-size: 3.125rem;
+  background: 0 0;
+  border: none;
+  width: 58.5%;
+  font-weight: 900;
+  text-align: right;
+  margin-bottom: 0.625rem;
+  margin-right: 50px;
+}
+
+.amount-input::placeholder {
+  color: #bbb;
+}
+
+.new-fundraiser-row {
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+  max-width: 60rem;
+}
+
+.new-fundraiser-column {
+  float: none;
+  margin-right: auto;
+  margin-left: auto;
+  width: 83.33333%;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.countdown-contain {
+  position: relative;
+  z-index: 0;
+}
+
+/* .input-countdown {
+  width: 100%;
+  height: 2.625rem;
+  margin-bottom: 0.625rem;
+} */
+
+.countdown-number {
+  bottom: 1.7rem;
+  color: #999;
+  font-size: 1.0625rem;
+  font-weight: 900;
+  position: absolute;
+  right: 0.5rem;
+}
+
+.agreement {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.agreement a {
+  line-height: inherit;
+  cursor: pointer;
+  color: #333;
+  text-decoration: underline;
+}
+
+.bottom-link {
+  width: 100%;
+  float: left;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  margin-top: 1.25rem;
+  text-align: center;
+}
+.text-under-card {
+  font-size: 0.975rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  text-align: center;
+  color: #666;
+  width: 100%;
+}

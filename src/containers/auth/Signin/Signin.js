@@ -43,7 +43,6 @@ const Signin = ({ error, loading, login, clearErrors, history }) => {
           placeholder="Email address"
           value={email}
           onChange={e => handleFormChange(e)}
-          required
         />
         {error.emailError && <ErrorBox>{error.emailError}!</ErrorBox>}
         <CustomInput
@@ -52,7 +51,6 @@ const Signin = ({ error, loading, login, clearErrors, history }) => {
           placeholder="Password"
           onChange={e => handleFormChange(e)}
           value={password}
-          required
         />
         {error.passwordError && <ErrorBox>{error.passwordError}!</ErrorBox>}
         <CustomButton type="submit">

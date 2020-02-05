@@ -5,7 +5,7 @@ import DropDownMenu from "../../dropdown-menu/DropDownMenu";
 const navigationItems = ({ isAuthenticated }) => {
   return (
     <nav>
-      <NavigationItem link="/raise" exact>
+      <NavigationItem link="/sahayog" exact>
         Start FundRaising
       </NavigationItem>
       <NavigationItem link="/guide" exact>

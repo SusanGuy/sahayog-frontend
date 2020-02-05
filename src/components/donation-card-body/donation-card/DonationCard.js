@@ -10,7 +10,7 @@ const DonationCard = props => {
         {props.new ? (
           <div className="new-campaign-tile">
             <div className="new-campaign-tile-body">
-              <Link className="new-campaign-link" to="/create">
+              <Link className="new-campaign-link" to="/sahayog">
                 <div className="new-campaign-logo"></div>
                 Start new fundraiser
               </Link>
