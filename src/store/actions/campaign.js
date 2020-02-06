@@ -37,10 +37,10 @@ export const createCampaign = (
       dispatch(setLoading());
       const fd = new FormData();
       fd.append("causePhoto", image, image.name);
-      const {
-        data: { _id }
-      } = await axios.post("/causes", { goal, title, description });
-      await axios.post(`/causes/${_id}/upload`, fd);
+      fd.append("goal", goal);
+      fd.append("title", title);
+      fd.append("description", description);
+      await axios.post("/causes", fd);
       dispatch(campaignCreated());
       history.push("/my-campaigns");
     } catch (err) {
