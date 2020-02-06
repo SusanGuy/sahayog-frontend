@@ -30,8 +30,8 @@ export const clearUser = () => {
 export const getContributions = () => {
   return async dispatch => {
     try {
+      dispatch(startLoading());
       const { data } = await axios.get("/causes/me");
-
       dispatch(contributionSuccess(data));
     } catch (err) {
       dispatch(userError(err.response ? err.response.data : err.message));
@@ -39,11 +39,17 @@ export const getContributions = () => {
   };
 };
 
+const startLoading = () => {
+  return {
+    type: actionTypes.SET_LOADING
+  };
+};
+
 export const getDonations = () => {
   return async dispatch => {
     try {
+      dispatch(startLoading());
       const { data } = await axios.get("/users/me/donations");
-
       dispatch(donationSuccess(data));
     } catch (err) {
       dispatch(userError(err.response ? err.response.data : err.message));

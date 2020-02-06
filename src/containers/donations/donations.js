@@ -11,6 +11,9 @@ const Donations = ({ getDonations, donations, loading, error }) => {
   if ((donations.length === 0 && error === null) || loading) {
     return <Spinner />;
   }
+  if (error.errMessage) {
+    return <DonationCardBody error={error.errMessage} />;
+  }
   return <DonationCardBody donations={donations} />;
 };
 

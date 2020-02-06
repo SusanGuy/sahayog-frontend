@@ -3,12 +3,17 @@ const initialState = {
   donations: [],
   contributions: [],
   error: null,
-  loading: true
+  loading: false
 };
 
 const userReducer = (state = initialState, action) => {
   const { type } = action;
   switch (type) {
+    case actionTypes.SET_LOADING:
+      return {
+        ...state,
+        loading: true
+      };
     case actionTypes.DONATIONS_SUCCESS:
       return {
         ...state,
@@ -32,12 +37,7 @@ const userReducer = (state = initialState, action) => {
       };
 
     case actionTypes.CLEAR_USER:
-      return {
-        donations: [],
-        contributions: [],
-        error: null,
-        loading: false
-      };
+      return initialState;
     default:
       return state;
   }

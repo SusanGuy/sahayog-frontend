@@ -27,7 +27,6 @@ const campaignReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        campaignStarted: false,
         error: action.payload
       };
 

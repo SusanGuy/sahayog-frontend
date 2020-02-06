@@ -10,7 +10,6 @@ import { startCampaign } from "../../../store/actions/campaign";
 import "./raise.css";
 
 const Raise = ({
-  campaign,
   history,
   match,
   startCampaign,

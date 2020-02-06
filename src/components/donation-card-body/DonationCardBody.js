@@ -1,22 +1,31 @@
 import React from "react";
 import "./donationCardBody.css";
 import DonationCard from "./donation-card/DonationCard";
-const DonationCardBody = ({ campaigns, donations }) => {
+const DonationCardBody = ({ campaigns, donations, error }) => {
   let cards;
   if (campaigns) {
-    cards = campaigns.map(({ title, _id, createdAt }) => (
-      <DonationCard campaign key={_id} title={title} created={createdAt} />
+    cards = campaigns.map(({ images, title, _id, createdAt }) => (
+      <DonationCard
+        campaign
+        key={_id}
+        image={images[0].image}
+        title={title}
+        created={createdAt}
+      />
     ));
   } else if (donations) {
-    cards = donations.map(({ cause: { title }, _id, amount, date }) => (
+    cards = donations.map(({ cause: { title, images }, _id, amount, date }) => (
       <DonationCard
         donation
         key={_id}
+        image={images[0].image}
         title={title}
         amount={amount}
         created={date}
       />
     ));
+  } else if (error) {
+    cards = <p>{error}</p>;
   }
 
   return (

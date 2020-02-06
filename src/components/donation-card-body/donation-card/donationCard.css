@@ -31,6 +31,7 @@
 .user-card-image-wrapper-row img {
   max-width: 100%;
   transform: scale(1);
+  opacity: 0.2;
 }
 
 .main-image-container {

@@ -5,12 +5,13 @@ const ppImage = ({ small, name, avatar }) => {
   if (small) {
     classes.join("dropdown-image");
   }
+
   return (
     <img
       className={classes.join(" ")}
       src={
         avatar
-          ? `data:image/png;base64, ${avatar}`
+          ? `http://localhost:3000${avatar}`
           : "https://cdn1.iconfinder.com/data/icons/user-avatars-2/300/07-512.png"
       }
       alt={name}

@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-
+import axios from "../../axios";
 export const startCampaign = (goal, title, description, history, match) => {
   let validationErrors = {};
   if (goal === "" || goal > 5000000) {
@@ -7,10 +7,10 @@ export const startCampaign = (goal, title, description, history, match) => {
   }
   if (
     title === "" ||
-    title.split(" ").length < 5 ||
-    title.split(" ").length > 50
+    title.split(" ").length < 4 ||
+    title.split(" ").length > 10
   ) {
-    validationErrors.titleError = "Enter a title between 5 to 50 words!";
+    validationErrors.titleError = "Enter a title between 4 to 10 words!";
   }
   if (description === "" || description.split(" ").length < 100) {
     validationErrors.descriptionError =
@@ -22,6 +22,43 @@ export const startCampaign = (goal, title, description, history, match) => {
   }
   history.push(`${match.url}/media`);
   return campaignStarted(goal, title, description);
+};
+
+export const createCampaign = (
+  goal,
+  title,
+  description,
+
+  image,
+  history
+) => {
+  return async dispatch => {
+    try {
+      dispatch(setLoading());
+      const fd = new FormData();
+      fd.append("causePhoto", image, image.name);
+      const {
+        data: { _id }
+      } = await axios.post("/causes", { goal, title, description });
+      await axios.post(`/causes/${_id}/upload`, fd);
+      dispatch(campaignCreated());
+      history.push("/my-campaigns");
+    } catch (err) {
+      dispatch(campaignError(err.response ? err.response.data : err.message));
+    }
+  };
+};
+
+const setLoading = () => {
+  return {
+    type: actionTypes.SET_LOADING
+  };
+};
+
+const campaignCreated = () => {
+  return {
+    type: actionTypes.CAMPAIGN_CREATED
+  };
 };
 
 const campaignStarted = (goal, title, description) => {
