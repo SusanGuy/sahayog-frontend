@@ -10,11 +10,13 @@ import authReducer from "./store/reducers/auth";
 import userReducer from "./store/reducers/user";
 import uiReducer from "./store/reducers/ui";
 import campaignReducer from "./store/reducers/campaign";
+import alertReducer from "./store/reducers/alert";
 const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   modal: uiReducer,
-  campaign: campaignReducer
+  campaign: campaignReducer,
+  alert: alertReducer
 });
 
 const composeEnhancers =

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import "./changePassword.css";
+import CloseButton from "../../components/close-button/closeButton";
 import CustomInput from "../input/input";
 import { clearErrors, changePassword } from "../../store/actions/auth";
 import { connect } from "react-redux";
@@ -67,15 +68,13 @@ const ChangePassword = ({
       <div ref={node} className="password-change-modal">
         <div className="password-modal-header">
           <div className="overlay-header">Set your password</div>
-          <button
+          <CloseButton
+            passwordChange
             onClick={e => {
               e.preventDefault();
               hideModal();
             }}
-            className="close-button"
-          >
-            +
-          </button>
+          />
         </div>
         <div className="password-change-content">
           <div className="password-form-header">

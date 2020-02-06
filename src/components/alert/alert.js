@@ -1,35 +1,62 @@
 import React, { useRef, useCallback, useEffect } from "react";
+import CloseButton from "../../components/close-button/closeButton";
+import { connect } from "react-redux";
+import { removeAlert } from "../../store/actions/alert";
 import "./alert.css";
-const Alert = () => {
+const Alert = ({ message, type, removeAlert }) => {
   const node = useRef();
 
-  const handleClick = useCallback(e => {
-    if (node.current.contains(e.target)) {
-      return;
-    }
-    console.log("baira click vayo hai");
-  }, []);
+  const handleClick = useCallback(
+    e => {
+      if (node.current.contains(e.target)) {
+        return;
+      }
+      removeAlert();
+    },
+    [removeAlert]
+  );
 
   useEffect(() => {
     document.addEventListener("click", handleClick);
+
     return () => {
       document.removeEventListener("click", handleClick);
     };
   }, [handleClick]);
 
+  const classes = ["custom-alert"];
+  if (type === "success") {
+    classes.push("success");
+  }
+  if (type === "failure") {
+    classes.push("failure");
+  }
+
   return (
-    <div ref={node} className="custom-alert">
+    <div ref={node} className={classes.join(" ")}>
       <div className="custom-alert-row">
         <div className="custom-alert-column">
-          <i className="fas fa-exclamation"></i>Please check your email &
-          password or please sign in with your Facebook account
+          {type === "failure" ? (
+            <i
+              className="fas fa-exclamation"
+              style={{
+                color: "#c54646"
+              }}
+            ></i>
+          ) : (
+            <i
+              class="fas fa-check-circle"
+              style={{
+                color: "#006600"
+              }}
+            ></i>
+          )}
+          {message}
         </div>
-        <button className="custom-alert-button" type="button">
-          <i className="fas fa-times"></i>
-        </button>
+        <CloseButton onClick={e => removeAlert()} />
       </div>
     </div>
   );
 };
 
-export default Alert;
+export default connect(null, { removeAlert })(Alert);

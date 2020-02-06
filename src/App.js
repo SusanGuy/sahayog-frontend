@@ -20,7 +20,7 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = ({ loadUser }) => {
+const App = ({ loadUser, message, type, hidden }) => {
   useEffect(() => {
     loadUser();
   }, [loadUser]);
@@ -28,7 +28,7 @@ const App = ({ loadUser }) => {
   return (
     <Aux>
       <Navigation />
-      <Alert />
+      {!hidden && <Alert message={message} type={type} />}
       <Switch>
         <PrivateRoute path="/sahayog" component={Create} />
         <PrivateRoute
@@ -45,5 +45,12 @@ const App = ({ loadUser }) => {
     </Aux>
   );
 };
+const mapStateToProps = state => {
+  return {
+    message: state.alert.message,
+    type: state.alert.alertType,
+    hidden: state.alert.hidden
+  };
+};
 
-export default connect(null, { loadUser })(App);
+export default connect(mapStateToProps, { loadUser })(App);

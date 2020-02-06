@@ -1,4 +1,5 @@
 import * as actionTypes from "./actionTypes";
+import { createAlert } from "./alert";
 import axios from "../../axios";
 export const startCampaign = (goal, title, description, history, match) => {
   let validationErrors = {};
@@ -21,17 +22,11 @@ export const startCampaign = (goal, title, description, history, match) => {
     return campaignError(validationErrors);
   }
   history.push(`${match.url}/media`);
+
   return campaignStarted(goal, title, description);
 };
 
-export const createCampaign = (
-  goal,
-  title,
-  description,
-
-  image,
-  history
-) => {
+export const createCampaign = (goal, title, description, image, history) => {
   return async dispatch => {
     try {
       dispatch(setLoading());
@@ -43,6 +38,7 @@ export const createCampaign = (
       await axios.post("/causes", fd);
       dispatch(campaignCreated());
       history.push("/my-campaigns");
+      dispatch(createAlert("Campaign Succesfully Created", "success"));
     } catch (err) {
       dispatch(campaignError(err.response ? err.response.data : err.message));
     }

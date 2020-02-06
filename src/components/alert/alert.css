@@ -3,11 +3,18 @@
   z-index: 90;
   height: 7vh;
   top: 4rem;
-  background-color: #fce6e2;
+  transform: translateY(0%);
+  animation: popUpEntrada 0.5s;
   color: #333;
   padding: 1rem;
   border: 1px solid rgba(51, 51, 51, 0.09);
   border-radius: 4px;
+}
+.success {
+  background-color: #e6ffee;
+}
+.failure {
+  background-color: #fce6e2;
 }
 
 .custom-alert-row {
@@ -24,19 +31,6 @@
 }
 
 .custom-alert-column i {
-  color: #c54646;
   line-height: 1.59rem;
   margin-right: 10px;
-}
-
-.custom-alert-button {
-  border-radius: 4px;
-  background: 0 0;
-  line-height: 1;
-  cursor: pointer;
-  font-size: inherit;
-  border: 0;
-  padding: 0;
-  color: #333;
-  font-weight: 900;
 }

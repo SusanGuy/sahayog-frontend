@@ -16,3 +16,5 @@ export const START_CAMPAIGN = "START_CAMPAIGN";
 export const SET_LOADING = "SET_LOADING";
 export const CAMPAIGN_ERROR = "CAMPAIGN_ERROR";
 export const FETCH_USER_LOADING = "FETCH_USER_LOADING";
+export const SET_ALERT = "SET_ALERT";
+export const REMOVE_ALERT = "REMOVE_ALERT";
