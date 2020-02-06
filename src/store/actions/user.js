@@ -41,7 +41,7 @@ export const getContributions = () => {
 
 const startLoading = () => {
   return {
-    type: actionTypes.SET_LOADING
+    type: actionTypes.FETCH_USER_LOADING
   };
 };
 

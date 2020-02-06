@@ -9,7 +9,7 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   const { type } = action;
   switch (type) {
-    case actionTypes.SET_LOADING:
+    case actionTypes.FETCH_USER_LOADING:
       return {
         ...state,
         loading: true

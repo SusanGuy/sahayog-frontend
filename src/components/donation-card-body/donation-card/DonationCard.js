@@ -4,9 +4,15 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import "./donationCard.css";
 const DonationCard = props => {
+  const cursor = props.new ? "unset" : "pointer";
   return (
     <div className="user-card-column">
-      <div className="user-card-inner">
+      <div
+        style={{
+          cursor
+        }}
+        className="user-card-inner"
+      >
         {props.new ? (
           <div className="new-campaign-tile">
             <div className="new-campaign-tile-body">

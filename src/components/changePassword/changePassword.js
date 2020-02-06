@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import "./changePassword.css";
 import CustomInput from "../input/input";
 import { clearErrors, changePassword } from "../../store/actions/auth";
@@ -24,6 +24,16 @@ const ChangePassword = ({
     confirm_new_password: ""
   });
 
+  const handleClick = useCallback(
+    e => {
+      if (node.current.contains(e.target)) {
+        return;
+      }
+      hideModal();
+    },
+    [hideModal]
+  );
+
   useEffect(() => {
     clearErrors();
     if (hidden) {
@@ -34,14 +44,7 @@ const ChangePassword = ({
       document.removeEventListener("click", handleClick);
       document.body.style.overflow = "unset";
     };
-  }, [clearErrors, hidden]);
-
-  const handleClick = e => {
-    if (node.current.contains(e.target)) {
-      return;
-    }
-    hideModal();
-  };
+  }, [clearErrors, hidden, handleClick]);
 
   const { current_password, new_password, confirm_new_password } = formData;
   const handleChange = e => {
