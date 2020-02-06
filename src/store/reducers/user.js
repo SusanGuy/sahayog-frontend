@@ -2,7 +2,7 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
   donations: [],
   contributions: [],
-  error: null,
+  error: {},
   loading: false
 };
 
@@ -18,14 +18,14 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         donations: action.donations,
-        error: null,
+        error: {},
         loading: false
       };
     case actionTypes.CONTRIBUTIONS_SUCCESS:
       return {
         ...state,
         contributions: action.contributions,
-        error: null,
+        error: {},
         loading: false
       };
 

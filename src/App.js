@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Auth from "./containers/auth/auth";
 import Create from "./containers/create/create";
 import { Switch, Route } from "react-router-dom";
+import Alert from "./components/alert/alert";
 import PrivateRoute from "./components/routing/privateRoute";
 import AccountSetttings from "./containers/account/account";
 import { setAuthToken } from "./utils";
@@ -27,6 +28,7 @@ const App = ({ loadUser }) => {
   return (
     <Aux>
       <Navigation />
+      <Alert />
       <Switch>
         <PrivateRoute path="/sahayog" component={Create} />
         <PrivateRoute
