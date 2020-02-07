@@ -31,8 +31,8 @@ const App = ({ loadUser, message, type, hidden }) => {
       <Navigation />
       {!hidden && <Alert message={message} type={type} />}
       <Switch>
-        <Route exact path="/cause/:id" component={Cause} />
         <PrivateRoute path="/sahayog" component={Create} />
+        <Route exact path="/cause/:id" component={Cause} />
         <PrivateRoute
           exact
           path="/account-settings"

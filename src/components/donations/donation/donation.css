@@ -1,0 +1,57 @@
+.o-donation-list-item {
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+  padding-bottom: 1rem;
+}
+
+.o-donation-list-item::marker {
+  list-style-type: none;
+}
+
+.donation-person-info {
+  display: flex;
+}
+
+.person-info-name {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.donation-info-content {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 5px;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  color: currentColor;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.campaign-donation-amount-content {
+  font-size: inherit;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.weight-900 {
+  font-weight: 900;
+}
+
+.color-gray {
+  color: #767676;
+}
+
+.arko-class::before {
+  margin-right: 0.5rem;
+  content: "•";
+  font-size: 1.486em;
+  font-weight: 1000;
+  color: rgb(238, 238, 238);
+  display: inline-block;
+}
+.see-all-button-container {
+  text-align: center;
+  margin-left: 0 !important;
+}

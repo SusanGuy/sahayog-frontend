@@ -1,0 +1,52 @@
+.campaign-comment-list-item {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+}
+
+.m-comment {
+  grid-template-columns: 40px 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "comment-avatar comment-header" "comment-avatar comment-content" ". comment-footer";
+  display: grid;
+  grid-row-gap: 0.25rem;
+  grid-column-gap: 1rem;
+}
+
+.m-comment-header {
+  display: grid;
+  grid-column-gap: 1rem;
+  grid-template-columns: auto 25px;
+  grid-template-rows: auto;
+  grid-template-areas: "comment-description comment-pin" "comment-flair comment-pin";
+}
+
+.m-comment-description {
+  grid-area: comment-description;
+  word-break: break-all;
+}
+
+.m-comment-content {
+  grid-area: comment-content;
+  margin-bottom: 1rem;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+.m-comment-footer {
+  grid-area: comment-footer;
+}
+
+.m-comment-footer ul {
+  margin-top: -1rem;
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.m-comment-footer .m-meta-list-item {
+  margin-top: 1rem;
+  display: flex;
+  margin-right: 1rem;
+  align-items: center;
+}

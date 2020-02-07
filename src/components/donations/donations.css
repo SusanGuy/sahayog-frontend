@@ -1,0 +1,76 @@
+.p-campaign-sidebar {
+  position: relative;
+  grid-area: sidebar;
+}
+
+.o-campaign-sidebar {
+  position: sticky;
+  top: 1rem;
+  background: #fff;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.3125rem 1rem -0.1875rem rgba(0, 0, 0, 0.2);
+  padding-bottom: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+.o-campaign-sidebar-wrapper {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.o-campaign-sidebar-wrapper button {
+  margin-top: 2rem;
+}
+
+.o-campaign-sidebar-progress-meter {
+  display: grid;
+}
+
+.a-progress-bar {
+  grid-row: 2/3;
+  margin-bottom: 0;
+  border: none;
+  border-radius: 0.125rem;
+  display: block;
+  height: 0.25rem;
+  width: 100%;
+}
+
+.m-progress-meter-heading {
+  font-size: 1.5rem;
+  grid-row: 1/2;
+  margin-bottom: 0.75rem;
+  line-height: 0.8;
+  margin-top: 0.25rem;
+  display: block;
+  font-weight: 900;
+}
+
+.raised-title {
+  color: #767676;
+  margin-left: 10px;
+  font-weight: 400;
+  font-size: 0.975rem;
+  line-height: 1.21;
+}
+
+.donations-campaign-sidebar-wrapper {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.donation-trending-logo {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #960064;
+}
+
+.donation-trending-logo strong {
+  font-weight: 900;
+}
+
+.campaign-donation-container {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}

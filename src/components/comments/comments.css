@@ -1,0 +1,33 @@
+.p-campaign-content {
+  grid-area: content;
+  background: #fff;
+  padding: 20px;
+}
+
+.comment-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.comment-heading-3 {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.33;
+  margin-bottom: 0 !important;
+}
+
+.comment-ruler-line {
+  border-top: 1px solid #ddd;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.campaigns-comments-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
