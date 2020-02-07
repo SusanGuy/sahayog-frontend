@@ -1,12 +1,16 @@
 import React from "react";
 import Aux from "../../../hoc/Aux/aux";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
+
 import moment from "moment";
 import "./donationCard.css";
 const DonationCard = props => {
   const cursor = props.new ? "unset" : "pointer";
   return (
-    <div className="user-card-column">
+    <div
+      onClick={() => props.history.push(`/cause/${props.id}`)}
+      className="user-card-column"
+    >
       <div
         style={{
           cursor
@@ -46,4 +50,4 @@ const DonationCard = props => {
   );
 };
 
-export default DonationCard;
+export default withRouter(DonationCard);

@@ -7,6 +7,7 @@ const DonationCardBody = ({ campaigns, donations, error }) => {
     cards = campaigns.map(({ images, title, _id, createdAt }) => (
       <DonationCard
         campaign
+        id={_id}
         key={_id}
         image={images[0].image}
         title={title}

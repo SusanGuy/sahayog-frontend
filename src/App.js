@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import Logout from "./components/logout/logout";
 import { loadUser } from "./store/actions/auth";
 import Aux from "./hoc/Aux/aux";
+import Cause from "./containers/causes/causes";
 import Campaigns from "./containers/campaigns/campaigns";
 import Donations from "./containers/donations/donations";
 import Navigation from "./components/navigation/navigation";
@@ -30,6 +31,7 @@ const App = ({ loadUser, message, type, hidden }) => {
       <Navigation />
       {!hidden && <Alert message={message} type={type} />}
       <Switch>
+        <Route exact path="/cause/:id" component={Cause} />
         <PrivateRoute path="/sahayog" component={Create} />
         <PrivateRoute
           exact

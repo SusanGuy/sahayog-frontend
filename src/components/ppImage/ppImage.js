@@ -3,7 +3,7 @@ import "./ppImage.css";
 const ppImage = ({ small, name, avatar }) => {
   const classes = ["profile-image"];
   if (small) {
-    classes.join("dropdown-image");
+    classes.push("dropdown-image");
   }
 
   return (

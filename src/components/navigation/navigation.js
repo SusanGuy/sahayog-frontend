@@ -1,6 +1,7 @@
 import React from "react";
 import "./navigation.css";
 import { Link, withRouter } from "react-router-dom";
+import AuthButton from "../authButton/authButton";
 import { connect } from "react-redux";
 import NavigationItems from "./navigationItems/navigationItems";
 
@@ -16,11 +17,11 @@ const navigation = ({ isAuthenticated, history }) => {
       <NavigationItems isAuthenticated={isAuthenticated} />
       {!isAuthenticated ? (
         <Link to="/auth">
-          <button className="sign-in">Sign In</button>
+          <AuthButton>Sign In</AuthButton>
         </Link>
       ) : (
         <Link to="/logout">
-          <button className="sign-in sign-out">Sign Out</button>
+          <AuthButton signout>Sign Out</AuthButton>
         </Link>
       )}
     </header>

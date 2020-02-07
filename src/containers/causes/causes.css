@@ -1,0 +1,336 @@
+.campaign-body-wrapper {
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-top: 2rem !important;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.campaign-grid-body {
+  display: grid;
+  grid-template-columns: 1fr 4fr 4fr 4fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "header header header header header" "collage collage collage sidebar sidebar" ". description description sidebar sidebar" ". content content sidebar sidebar" ". reportbutton reportbutton sidebar sidebar" ". valueprops valueprops valueprops .";
+  grid-gap: 1.5rem 2rem;
+}
+
+.p-campaign-collage {
+  grid-area: collage;
+}
+
+.campaign-images {
+  grid-template-areas: "imageone";
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  display: grid;
+  grid-gap: 2px;
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.campaign-images li {
+  grid-area: imageone;
+}
+
+.campaign-images li::marker {
+  list-style-type: none;
+}
+
+.campaign-image-button {
+  padding-top: 56.25% !important;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background-color: transparent;
+  color: inherit;
+  font-size: 1em;
+  text-decoration: none;
+  font-family: inherit;
+  line-height: inherit;
+  border: 0;
+  padding: 0;
+}
+
+.campaign-image-background {
+  background-image: url(https://images.gofundme.com/bRgfPA7PD4n6utAmAWDmc3rGnuk=/720x405/https://d2g8igdw686xgo.cloudfront.net/45070002_1580152485383292_r.jpeg);
+  position: absolute;
+  top: 0;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.p-campaign-header {
+  margin-top: 1rem;
+  grid-area: header;
+  margin-bottom: -0.25rem;
+}
+
+.a-campaign-title {
+  margin-bottom: 0;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  display: block;
+  font-weight: 900;
+  margin-top: 0;
+}
+
+.p-campaign-sidebar {
+  position: relative;
+  grid-area: sidebar;
+}
+
+.o-campaign-sidebar {
+  position: sticky;
+  top: 1rem;
+  background: #fff;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.3125rem 1rem -0.1875rem rgba(0, 0, 0, 0.2);
+  padding-bottom: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+.o-campaign-sidebar-wrapper {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.o-campaign-sidebar-wrapper button {
+  margin-top: 2rem;
+}
+
+.o-campaign-sidebar-progress-meter {
+  display: grid;
+}
+
+.a-progress-bar {
+  grid-row: 2/3;
+  margin-bottom: 0;
+  border: none;
+  border-radius: 0.125rem;
+  display: block;
+  height: 0.25rem;
+  width: 100%;
+}
+
+.m-progress-meter-heading {
+  font-size: 1.5rem;
+  grid-row: 1/2;
+  margin-bottom: 0.75rem;
+  line-height: 0.8;
+  margin-top: 0.25rem;
+  display: block;
+  font-weight: 900;
+}
+
+.raised-title {
+  color: #767676;
+  margin-left: 10px;
+  font-weight: 400;
+  font-size: 0.975rem;
+  line-height: 1.21;
+}
+
+.donations-campaign-sidebar-wrapper {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.donation-trending-logo {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #960064;
+}
+
+.donation-trending-logo strong {
+  font-weight: 900;
+}
+
+.campaign-donation-container {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.o-donation-list-item {
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+  padding-bottom: 1rem;
+}
+
+.o-donation-list-item::marker {
+  list-style-type: none;
+}
+
+.donation-person-info {
+  display: flex;
+}
+
+.person-info-name {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.donation-info-content {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 5px;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  color: currentColor;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.campaign-donation-amount-content {
+  font-size: inherit;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.weight-900 {
+  font-weight: 900;
+}
+
+.color-gray {
+  color: #767676;
+}
+
+.arko-class::before {
+  margin-right: 0.5rem;
+  content: "•";
+  font-size: 1.486em;
+  font-weight: 1000;
+  color: rgb(238, 238, 238);
+  display: inline-block;
+}
+.see-all-button-container {
+  text-align: center;
+  margin-left: 0 !important;
+}
+
+.p-campaign-description {
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 3rem;
+  grid-area: description;
+  margin-right: 5rem;
+}
+
+.campaign-description-header {
+  margin-bottom: 1.5rem !important;
+}
+
+.campaign-story {
+  max-height: inherit;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  position: relative;
+  word-break: break-word;
+}
+
+.campaign-story span {
+  font-size: 1.0625rem;
+}
+
+.p-campaign-content {
+  grid-area: content;
+  background: #fff;
+  padding: 20px;
+}
+
+.comment-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.comment-heading-3 {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.33;
+  margin-bottom: 0 !important;
+}
+
+.comment-ruler-line {
+  border-top: 1px solid #ddd;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.campaigns-comments-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.campaign-comment-list-item {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+}
+
+.m-comment {
+  grid-template-columns: 40px 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "comment-avatar comment-header" "comment-avatar comment-content" ". comment-footer";
+  display: grid;
+  grid-row-gap: 0.25rem;
+  grid-column-gap: 1rem;
+}
+
+.m-comment-header {
+  display: grid;
+  grid-column-gap: 1rem;
+  grid-template-columns: auto 25px;
+  grid-template-rows: auto;
+  grid-template-areas: "comment-description comment-pin" "comment-flair comment-pin";
+}
+
+.m-comment-description {
+  grid-area: comment-description;
+  word-break: break-all;
+}
+
+.m-comment-content {
+  grid-area: comment-content;
+  margin-bottom: 1rem;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+.m-comment-footer {
+  grid-area: comment-footer;
+}
+
+.m-comment-footer ul {
+  margin-top: -1rem;
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.m-comment-footer .m-meta-list-item {
+  margin-top: 1rem;
+  display: flex;
+  margin-right: 1rem;
+  align-items: center;
+}
+
+.p-campaign-report-button {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  display: flex;
+  grid-area: reportbutton;
+  justify-content: center;
+}

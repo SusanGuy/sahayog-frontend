@@ -10,7 +10,7 @@ const DropDownMenu = ({ user }) => {
   const node = useRef();
 
   useEffect(() => {
-    document.addEventListener("click", handleClick); // return function to be called when unmounted
+    document.addEventListener("click", handleClick);
     return () => {
       document.removeEventListener("click", handleClick);
     };
@@ -31,7 +31,6 @@ const DropDownMenu = ({ user }) => {
             <Image
               name={user ? user.name : "user's image"}
               avatar={user && user.avatar ? user.avatar : null}
-              small
             />
           </button>
         </Link>

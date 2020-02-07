@@ -9,6 +9,7 @@
 }
 
 .dropdown-image {
-  width: 25px;
-  height: 25px;
+  width: 2.5em;
+  height: 2.5em;
+  margin-right: 1rem !important;
 }
