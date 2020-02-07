@@ -8,7 +8,7 @@ const Donations = ({ getDonations, donations, loading, error }) => {
     getDonations();
   }, [getDonations]);
 
-  if ((donations.length === 0 && error === null) || loading) {
+  if (donations.length === 0 && loading) {
     return <Spinner />;
   }
   if (error.errMessage) {

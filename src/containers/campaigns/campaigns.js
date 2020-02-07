@@ -8,7 +8,7 @@ const Campaigns = ({ contributions, getContributions, loading, error }) => {
     getContributions();
   }, [getContributions]);
 
-  if ((contributions.length === 0 && error === null) || loading) {
+  if (contributions.length === 0 && loading) {
     return <Spinner />;
   }
 
