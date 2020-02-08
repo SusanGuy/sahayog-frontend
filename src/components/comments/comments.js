@@ -1,27 +1,34 @@
 import React from "react";
 import "./comments.css";
 import Comment from "./comment/comment";
+import ErrorBox from "../errorMessage/errorMessage";
+import Aux from "../../hoc/Aux/aux";
 import AuthButton from "../authButton/authButton";
-const comments = () => {
+const comments = ({ comments }) => {
   return (
     <div className="p-campaign-content">
-      <div className="comment-list-header">
-        <h2 className="comment-heading-3">Comments (406)</h2>
-      </div>
-      <div className="comment-ruler-line"></div>
-      <ul className="campaigns-comments-list">
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
-      </ul>
-      <AuthButton>Show more</AuthButton>
+      {comments.length === 0 ? (
+        <ErrorBox>No comments made yet ...</ErrorBox>
+      ) : (
+        <Aux>
+          <div className="comment-list-header">
+            <h2 className="comment-heading-3">Comments ({comments.length})</h2>
+          </div>
+          <div className="comment-ruler-line"></div>
+          <ul className="campaigns-comments-list">
+            {comments.map(({ _id, date, text, user: { avatar, name } }) => (
+              <Comment
+                key={_id}
+                date={date}
+                comment={text}
+                avatar={avatar}
+                name={name}
+              />
+            ))}
+          </ul>
+          <AuthButton>Show more</AuthButton>
+        </Aux>
+      )}
     </div>
   );
 };

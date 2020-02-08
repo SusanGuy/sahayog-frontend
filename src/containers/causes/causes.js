@@ -42,7 +42,7 @@ const Causes = ({ match, loading, cause, getCause }) => {
         <header className="p-campaign-header">
           <h1 className="a-campaign-title">{cause.title}</h1>
         </header>
-        <Donations id={cause._id} />
+        <Donations goal={cause.goal} id={cause._id} />
         <div className="p-campaign-description">
           <div className="campaign-story">
             <span>All,</span>
@@ -58,7 +58,7 @@ const Causes = ({ match, loading, cause, getCause }) => {
             )}
           </div>
         </div>
-        <Comments />
+        <Comments comments={cause.comments} />
         <div className="p-campaign-report-button">
           <CustomActionButton>Report fundraiser</CustomActionButton>
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import ImageAvatar from "../../ppImage/ppImage";
+import Moment from "react-moment";
 import "./donation.css";
 const donation = ({ avatar, amount, name, date }) => {
   return (
@@ -14,7 +15,9 @@ const donation = ({ avatar, amount, name, date }) => {
                 <span className="weight-900">Rs. {amount} </span>
               </li>
               <li className="campaign-donation-amount-content arko-class ">
-                <span className="color-gray">12 mins</span>
+                <span className="color-gray">
+                  <Moment fromNow>{date}</Moment>
+                </span>
               </li>
             </ul>
           </div>

@@ -1,26 +1,26 @@
 import React from "react";
 import ImageAvatar from "../../ppImage/ppImage";
-
+import Moment from "react-moment";
 import "./comment.css";
-const comment = () => {
+const comment = ({ date, comment, avatar, name }) => {
   return (
     <li className="campaign-comment-list-item">
       <div className="m-comment">
-        <ImageAvatar small />
+        <ImageAvatar avatar={avatar} small />
         <header className="m-comment-header">
-          <div className="m-comment-description">
-            jonathan j donated <strong className="weight-900">Rs. 10</strong>
-          </div>
+          <div className="m-comment-description">{name}</div>
         </header>
         <div className="m-comment-content">
           <div className="m-read-more">
-            <span>good job thanks from jonathan</span>
+            <span>{comment}</span>
           </div>
         </div>
         <footer className="m-comment-footer">
           <ul className="list-unstyled m-meta-list m-meta-list--bullet">
             <li className="m-meta-list-item">
-              <span className="color-gray">8 hrs</span>
+              <span className="color-gray">
+                <Moment fromNow>{date}</Moment>
+              </span>
             </li>
           </ul>
         </footer>

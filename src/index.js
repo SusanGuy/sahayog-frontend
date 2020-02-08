@@ -12,13 +12,15 @@ import uiReducer from "./store/reducers/ui";
 import campaignReducer from "./store/reducers/campaign";
 import alertReducer from "./store/reducers/alert";
 import causeReducer from "./store/reducers/causes";
+import donationReducer from "./store/reducers/donations";
 const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   modal: uiReducer,
   campaign: campaignReducer,
   alert: alertReducer,
-  cause: causeReducer
+  cause: causeReducer,
+  donation: donationReducer
 });
 
 const composeEnhancers =
