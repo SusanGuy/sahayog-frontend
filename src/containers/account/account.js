@@ -5,6 +5,7 @@ import Label from "../../components/label/label";
 import { showModal } from "../../store/actions/ui";
 import { connect } from "react-redux";
 import Aux from "../../hoc/Aux/aux";
+
 import {
   uploadImage,
   deleteImage,

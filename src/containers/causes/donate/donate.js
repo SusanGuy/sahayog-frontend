@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import handleChange from "../../../regex";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import CustomInput from "../../../components/input/input";
@@ -10,20 +11,23 @@ import Spinner from "../../../components/Spinner/spinner";
 import CustomInputContainer from "../../../components/customInputContainer/customInputContainer";
 import "./donate.css";
 const Donate = ({ history, match, user, loading }) => {
-  const [formData, setformData] = useState({
+  const [formData, setFormData] = useState({
+    amount: "",
     first_name: "",
     last_name: "",
     email: ""
   });
 
   useEffect(() => {
-    setformData({
+    setFormData({
+      amount: "",
       first_name: !user ? " " : user.name.split(" ")[0],
       last_name: !user ? " " : user.name.split(" ")[1],
       email: !user ? " " : user.email
     });
   }, [user]);
-  const { first_name, last_name, email } = formData;
+  const { amount, first_name, last_name, email } = formData;
+  const error = {};
 
   if (loading || !user) {
     return <Spinner />;
@@ -38,7 +42,13 @@ const Donate = ({ history, match, user, loading }) => {
 
             <div className="donation-box">
               <div className="rupees-sign">Rs.</div>
-              <input className="donation-amount" />
+              <input
+                type="tel"
+                className="donation-amount"
+                name="amount"
+                value={amount}
+                onChange={e => handleChange(e, setFormData, error, formData)}
+              />
               <div className="rupees-sign zeros">.00</div>
             </div>
 
@@ -47,28 +57,32 @@ const Donate = ({ history, match, user, loading }) => {
                 <CustomInputContainer
                   first_name={first_name}
                   last_name={last_name}
+                  onChange={e => handleChange(e, setFormData, error, formData)}
                 />
 
                 <Label>Email</Label>
-                <CustomInput name="email" value={email} placeholder="Email" />
+                <CustomInput
+                  name="email"
+                  onChange={e => handleChange(e, setFormData, error, formData)}
+                  value={email}
+                  placeholder="Email"
+                />
               </div>
 
               <hr className="custom-hr" />
 
-              <CustomButtom>Donate</CustomButtom>
+              <CustomButtom type="submit">Donate</CustomButtom>
 
               <div className="donate-description">
                 By continuing, you agree to the Sahayog{" "}
                 <CustomActionButton>terms </CustomActionButton> and acknowledge
                 receipt of our{" "}
-                <CustomActionButton>privacy policy </CustomActionButton>.
+                <CustomActionButton>privacy policy </CustomActionButton>
               </div>
 
               <div className="go-back-link">
                 <BottomLink>Go Back</BottomLink>
               </div>
-
-              <div id="js-focus_cycler" tabindex="44"></div>
             </div>
           </div>
         </form>

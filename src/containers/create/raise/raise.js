@@ -5,6 +5,7 @@ import CustomInput from "../../../components/input/input";
 import CustomActionButton from "../../../components/custom-action-button/actionButton";
 import { connect } from "react-redux";
 import { clearErrors } from "../../../store/actions/auth";
+import handleChange from "../../../regex";
 import ErrorBox from "../../../components/errorMessage/errorMessage";
 import { startCampaign } from "../../../store/actions/campaign";
 import "./raise.css";
@@ -44,25 +45,6 @@ const Raise = ({
     loadedDescription
   ]);
 
-  const handleChange = e => {
-    if (Object.keys(error).length !== 0) {
-      clearErrors();
-    }
-    if (e.target.name === "goal") {
-      const re = /^[0-9\b]+$/;
-      return e.target.value === "" || re.test(e.target.value)
-        ? setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-          })
-        : null;
-    }
-
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
   const handleNext = e => {
     e.preventDefault();
     startCampaign(goal, title, description, history, match);
@@ -82,7 +64,9 @@ const Raise = ({
                     className="amount-input"
                     name="goal"
                     value={goal}
-                    onChange={e => handleChange(e)}
+                    onChange={e =>
+                      handleChange(e, setFormData, error, formData)
+                    }
                     placeholder="1000"
                     required
                   />
@@ -98,7 +82,9 @@ const Raise = ({
                     type="text"
                     value={title}
                     name="title"
-                    onChange={e => handleChange(e)}
+                    onChange={e =>
+                      handleChange(e, setFormData, error, formData)
+                    }
                     placeholder="Campaign title"
                     required
                   />
@@ -112,7 +98,9 @@ const Raise = ({
                     textarea
                     value={description}
                     name="description"
-                    onChange={e => handleChange(e)}
+                    onChange={e =>
+                      handleChange(e, setFormData, error, formData)
+                    }
                     placeholder="Campaign Description"
                     required
                   />
