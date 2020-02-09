@@ -32,7 +32,7 @@ const App = ({ loadUser, message, type, hidden }) => {
       {!hidden && <Alert message={message} type={type} />}
       <Switch>
         <PrivateRoute path="/sahayog" component={Create} />
-        <Route exact path="/cause/:id" component={Cause} />
+        <Route path="/cause/:id" component={Cause} />
         <PrivateRoute
           exact
           path="/account-settings"

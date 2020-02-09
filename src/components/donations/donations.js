@@ -7,11 +7,17 @@ import "./donations.css";
 import CustomButton from "../CustomButton/customButton";
 import Donation from "./donation/donation";
 import AuthButton from "../authButton/authButton";
-const Donations = ({ getDonations, goal, donations, loading, id }) => {
+const Donations = ({
+  history,
+  match,
+  getDonations,
+  goal,
+  donations,
+  loading,
+  id
+}) => {
   useEffect(() => {
-    setInterval(() => {
-      getDonations(id);
-    }, 5000);
+    getDonations(id);
   }, [getDonations, id]);
 
   const totalDonations = donations.reduce((total, current) => {
@@ -39,7 +45,9 @@ const Donations = ({ getDonations, goal, donations, loading, id }) => {
               </h2>
             </div>
 
-            <CustomButton>Donate Now</CustomButton>
+            <CustomButton onClick={e => history.push(`${match.url}/donate`)}>
+              Donate Now
+            </CustomButton>
           </div>
 
           <div className="donations-campaign-sidebar-wrapper">

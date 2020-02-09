@@ -1,7 +1,7 @@
 import React from "react";
 import Raise from "./raise/raise";
 import UploadImage from "./uploadImage/uploadImage";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 const create = ({ match }) => {
   return (
     <Switch>
@@ -11,4 +11,4 @@ const create = ({ match }) => {
   );
 };
 
-export default withRouter(create);
+export default create;
