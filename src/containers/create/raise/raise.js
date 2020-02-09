@@ -122,7 +122,7 @@ const Raise = ({
                   <span className="agreement">
                     The platform is free for organizers. Transaction fee is 2.9%
                     plus Rs.30 per donation. By continuing, you agree to the
-                    GoFundMe <CustomActionButton>terms</CustomActionButton> and
+                    Sahayog <CustomActionButton>terms</CustomActionButton> and
                     acknowledge receipt of our{" "}
                     <CustomActionButton>privacy policy </CustomActionButton>
                   </span>

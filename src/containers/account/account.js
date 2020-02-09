@@ -17,7 +17,7 @@ import Spinner from "../../components/Spinner/spinner";
 import ErrorBox from "../../components/errorMessage/errorMessage";
 import PasswordModal from "../../components/changePassword/changePassword";
 import "./account.scss";
-
+import CustomInputContainer from "../../components/customInputContainer/customInputContainer";
 const Account = ({
   user,
   uploadImage,
@@ -67,31 +67,12 @@ const Account = ({
       <div className="account-settings-container">
         <div className="account-settings-row">
           <form onSubmit={e => handleSubmit(e)}>
-            <Label>Full Name</Label>
-            <div className="account-settings-input">
-              <div className="input-row">
-                <div className="input-column">
-                  <CustomInput
-                    name="first_name"
-                    type="text"
-                    placeholder="First Name"
-                    value={first_name}
-                    onChange={e => handleChange(e)}
-                    disabled
-                  />
-                </div>
-                <div className="input-column">
-                  <CustomInput
-                    name="last_name"
-                    type="text"
-                    placeholder="Last Name"
-                    value={last_name}
-                    disabled
-                    onChange={e => handleChange(e)}
-                  />
-                </div>
-              </div>
-            </div>
+            <CustomInputContainer
+              first_name={first_name}
+              last_name={last_name}
+              onChange={e => handleChange(e)}
+              disabled
+            />
             <Label>Photo</Label>
             <div className="account-settings-photo">
               <div
