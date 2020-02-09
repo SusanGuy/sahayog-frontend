@@ -11,14 +11,14 @@ const Donations = ({ getDonations, goal, donations, loading, id }) => {
   useEffect(() => {
     setInterval(() => {
       getDonations(id);
-    }, 2000);
+    }, 5000);
   }, [getDonations, id]);
 
   const totalDonations = donations.reduce((total, current) => {
     return total + current.amount;
   }, 0);
 
-  const splicedDonations = donations.splice(0, 5);
+  const splicedDonations = donations.filter((_, i) => i < 5);
 
   return (
     <div className="p-campaign-sidebar">
