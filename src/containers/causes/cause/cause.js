@@ -52,11 +52,11 @@ const Cause = ({ match, history, loading, cause, getCause }) => {
         <div className="p-campaign-description">
           <div className="campaign-story">
             <span>All,</span>
-
+            <br />
             {newDescription.map(description =>
               description !== "" ? (
                 <Aux key={description}>
-                  <br /> <br /> <br /> {description}
+                  <br /> {description}
                 </Aux>
               ) : (
                 ""

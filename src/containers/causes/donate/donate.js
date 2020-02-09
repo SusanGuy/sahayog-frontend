@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import axios from "../../../axios";
 import handleChange from "../../../regex";
 import { connect } from "react-redux";
+import { createAlert } from "../../../store/actions/alert";
 import { withRouter } from "react-router-dom";
 import CustomInput from "../../../components/input/input";
 import CustomActionButton from "../../../components/custom-action-button/actionButton";
@@ -10,33 +12,69 @@ import Label from "../../../components/label/label";
 import Spinner from "../../../components/Spinner/spinner";
 import CustomInputContainer from "../../../components/customInputContainer/customInputContainer";
 import "./donate.css";
-const Donate = ({ history, match, user, loading }) => {
+const Donate = ({ history, match, user, loading, createAlert }) => {
   const [formData, setFormData] = useState({
+    donationLoading: false,
     amount: "",
     first_name: "",
     last_name: "",
-    email: ""
+    email: "",
+    error: {}
   });
 
   useEffect(() => {
     setFormData({
-      amount: "",
+      ...formData,
       first_name: !user ? " " : user.name.split(" ")[0],
       last_name: !user ? " " : user.name.split(" ")[1],
       email: !user ? " " : user.email
     });
-  }, [user]);
-  const { amount, first_name, last_name, email } = formData;
-  const error = {};
+  }, [user, setFormData]);
+  const {
+    amount,
+    first_name,
+    last_name,
+    error,
+    donationLoading,
+    email
+  } = formData;
 
   if (loading || !user) {
     return <Spinner />;
   }
 
+  if (donationLoading) {
+    return <Spinner />;
+  }
+
+  const handleDonation = async e => {
+    e.preventDefault();
+    try {
+      setFormData({
+        ...formData,
+        loading: true
+      });
+      await axios.post(`/causes/donate/${match.params.id}`, { amount });
+      createAlert("Donation Posted Succesfully", "success");
+
+      history.push("/cause/" + match.params.id);
+    } catch (err) {
+      setFormData({
+        ...formData,
+        donationLoading: false
+      });
+
+      createAlert(
+        err.response ? err.response.data.errMessage : err.message,
+        "failure"
+      );
+    }
+  };
+
   return (
     <div>
       <div className="donate-div">
-        <form>
+        <form onSubmit={e => handleDonation(e)}>
           <div className="process-donation">
             <div className="process-header">Enter your Donation</div>
 
@@ -98,4 +136,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(withRouter(Donate));
+export default connect(mapStateToProps, { createAlert })(withRouter(Donate));

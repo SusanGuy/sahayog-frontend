@@ -28,7 +28,7 @@ const Donations = ({
 
   return (
     <div className="p-campaign-sidebar">
-      {loading && donations.length === 0 ? (
+      {loading ? (
         <Spinner />
       ) : (
         <aside className="o-campaign-sidebar">

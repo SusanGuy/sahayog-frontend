@@ -3,6 +3,7 @@ import axios from "../../axios";
 export const getDonations = id => {
   return async dispatch => {
     try {
+      dispatch(setLoading());
       const { data: donations } = await axios.get(`/causes/${id}/donations`);
       dispatch(getAllDonations(donations));
     } catch (err) {
@@ -24,5 +25,11 @@ const donationError = payload => {
   return {
     type: actionTypes.GET_DONATION_ERROR,
     payload
+  };
+};
+
+const setLoading = () => {
+  return {
+    type: actionTypes.SET_DONATION_LOADING
   };
 };
