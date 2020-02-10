@@ -20,6 +20,7 @@ const Comment = ({ donation }) => {
               <div className="comment-tile-img-contain">
                 <img
                   className="comment-tile-img"
+                  alt="cause_image"
                   src="https://d2g8igdw686xgo.cloudfront.net/25103728_1509690597.9007.jpg"
                 />
                 <div className="comment-tile-shadow"></div>

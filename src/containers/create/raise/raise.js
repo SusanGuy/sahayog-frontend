@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CustomButton from "../../../components/CustomButton/customButton";
 import { withRouter } from "react-router-dom";
+
 import CustomInput from "../../../components/input/input";
 import CustomActionButton from "../../../components/custom-action-button/actionButton";
 import { connect } from "react-redux";
@@ -64,9 +65,12 @@ const Raise = ({
                     className="amount-input"
                     name="goal"
                     value={goal}
-                    onChange={e =>
-                      handleChange(e, setFormData, error, formData)
-                    }
+                    onChange={e => {
+                      if (Object.keys(error).length !== 0) {
+                        clearErrors();
+                      }
+                      handleChange(e, setFormData, error, formData);
+                    }}
                     placeholder="1000"
                     required
                   />
@@ -82,9 +86,12 @@ const Raise = ({
                     type="text"
                     value={title}
                     name="title"
-                    onChange={e =>
-                      handleChange(e, setFormData, error, formData)
-                    }
+                    onChange={e => {
+                      if (Object.keys(error).length !== 0) {
+                        clearErrors();
+                      }
+                      handleChange(e, setFormData, error, formData);
+                    }}
                     placeholder="Campaign title"
                     required
                   />
@@ -98,9 +105,12 @@ const Raise = ({
                     textarea
                     value={description}
                     name="description"
-                    onChange={e =>
-                      handleChange(e, setFormData, error, formData)
-                    }
+                    onChange={e => {
+                      if (Object.keys(error).length !== 0) {
+                        clearErrors();
+                      }
+                      handleChange(e, setFormData, error, formData);
+                    }}
                     placeholder="Campaign Description"
                     required
                   />
