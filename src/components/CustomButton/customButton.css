@@ -32,3 +32,11 @@
   line-height: 0.875rem;
   margin-right: 10px;
 }
+
+.twitter-button {
+  background-color: #1da1f2;
+}
+
+.twitter-button:hover {
+  background-color: #2da8f5;
+}

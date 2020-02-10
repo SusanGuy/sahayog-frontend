@@ -30,4 +30,5 @@
 
 .textarea {
   height: 307px;
+  resize: none;
 }
