@@ -108,3 +108,12 @@
   color: #15c7c7;
   text-decoration: none;
 }
+
+.donate-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.donate-buttons button {
+  margin-right: 15px;
+}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../../axios";
 import handleChange from "../../../regex";
+import ErrorBox from "../../../components/errorMessage/errorMessage";
 import { connect } from "react-redux";
 import { createAlert } from "../../../store/actions/alert";
 import { withRouter } from "react-router-dom";
@@ -11,13 +12,15 @@ import BottomLink from "../../../components/custom-action-button/actionButton";
 import Label from "../../../components/label/label";
 import Spinner from "../../../components/Spinner/spinner";
 import CustomInputContainer from "../../../components/customInputContainer/customInputContainer";
+import KhaltiCheckout from "khalti-web";
 import "./donate.css";
 const Donate = ({ history, match, user, createAlert }) => {
   const [formData, setFormData] = useState({
     amount: "",
     first_name: "",
     last_name: "",
-    email: ""
+    email: "",
+    formError: ""
   });
 
   const [donationData, setDonationData] = useState({
@@ -31,10 +34,11 @@ const Donate = ({ history, match, user, createAlert }) => {
       amount: "",
       first_name: !user ? " " : user.name.split(" ")[0],
       last_name: !user ? " " : user.name.split(" ")[1],
-      email: !user ? " " : user.email
+      email: !user ? " " : user.email,
+      formError: ""
     });
   }, [user]);
-  const { amount, first_name, last_name, email } = formData;
+  const { amount, first_name, last_name, email, formError } = formData;
 
   const { donationLoading, error } = donationData;
 
@@ -44,6 +48,12 @@ const Donate = ({ history, match, user, createAlert }) => {
 
   const handleDonation = async e => {
     e.preventDefault();
+    if (amount === "") {
+      return setFormData({
+        ...formData,
+        formError: "Please enter a donation amount!"
+      });
+    }
     try {
       setDonationData({
         ...donationData,
@@ -72,6 +82,26 @@ const Donate = ({ history, match, user, createAlert }) => {
       );
     }
   };
+
+  var config = {
+    publicKey: "test_public_key_5535b5e015834104bdd1b24d62e2ec02",
+    productIdentity: "1234567890",
+    productName: "Dragon",
+    productUrl: "http://gameofthrones.wikia.com/wiki/Dragons",
+    eventHandler: {
+      onSuccess(payload) {
+        console.log(payload);
+      },
+      onError(error) {
+        console.log(error);
+      },
+      onClose() {
+        console.log("widget is closing");
+      }
+    }
+  };
+
+  var checkout = new KhaltiCheckout(config);
 
   return (
     <div>
@@ -110,8 +140,21 @@ const Donate = ({ history, match, user, createAlert }) => {
               </div>
 
               <hr className="custom-hr" />
-
-              <CustomButtom type="submit">Donate</CustomButtom>
+              {formError && <ErrorBox>{formError}</ErrorBox>}
+              <div className="donate-buttons">
+                <CustomButtom>Donate</CustomButtom>
+                <CustomButtom
+                  onClick={e => {
+                    e.preventDefault();
+                    checkout.show({
+                      amount: parseInt(amount) * 100
+                    });
+                  }}
+                  khalti="true"
+                >
+                  Donate with Khalti
+                </CustomButtom>
+              </div>
 
               <div className="donate-description">
                 By continuing, you agree to the Sahayog{" "}

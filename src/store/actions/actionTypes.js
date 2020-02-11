@@ -16,6 +16,7 @@ export const SET_LOADING = "SET_LOADING";
 export const CAMPAIGN_ERROR = "CAMPAIGN_ERROR";
 export const FETCH_USER_LOADING = "FETCH_USER_LOADING";
 export const SET_ALERT = "SET_ALERT";
+export const CLEAR_USER = "CLEAR_USER";
 export const REMOVE_ALERT = "REMOVE_ALERT";
 export const GET_CAUSE = "GET_CAUSES";
 export const GET_CAUSE_ERROR = "GET_CAUSES_ERROR";

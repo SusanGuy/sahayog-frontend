@@ -124,6 +124,7 @@ const Raise = ({
                     <CustomActionButton>privacy policy </CustomActionButton>
                   </span>
                 </div>
+
                 <CustomButton type="submit">Next</CustomButton>
               </div>
             </div>

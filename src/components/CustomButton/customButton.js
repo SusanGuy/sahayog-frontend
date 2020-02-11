@@ -10,6 +10,10 @@ const customButton = ({ children, width, ...rest }) => {
     classes.push("twitter-button");
   }
 
+  if (rest.khalti) {
+    classes.push("khalti-button");
+  }
+
   return (
     <button style={{ width }} className={classes.join(" ")} {...rest}>
       {rest.facebook && <i className="fab fa-facebook-f"></i>}

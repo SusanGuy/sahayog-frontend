@@ -24,9 +24,6 @@ const campaignReducer = (state = initialState, action) => {
         ...action.payload
       };
 
-    case actionTypes.AUTH_LOGOUT: {
-      return initialState;
-    }
     case actionTypes.CAMPAIGN_ERROR:
       return {
         ...state,

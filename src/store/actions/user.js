@@ -50,3 +50,9 @@ export const getDonations = () => {
     }
   };
 };
+
+export const clearUser = () => {
+  return {
+    type: actionTypes.CLEAR_USER
+  };
+};

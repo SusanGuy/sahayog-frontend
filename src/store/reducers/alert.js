@@ -15,9 +15,6 @@ const alertReducer = (state = initialState, action) => {
     case actionTypes.REMOVE_ALERT:
       return initialState;
 
-    case actionTypes.AUTH_LOGOUT: {
-      return initialState;
-    }
     default:
       return state;
   }
