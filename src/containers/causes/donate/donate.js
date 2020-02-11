@@ -21,6 +21,7 @@ const Donate = ({ history, match, user, createAlert }) => {
   });
 
   const [donationData, setDonationData] = useState({
+    donationId: "",
     donationLoading: false,
     error: {}
   });
@@ -48,9 +49,16 @@ const Donate = ({ history, match, user, createAlert }) => {
         ...donationData,
         loading: true
       });
-      await axios.post(`/causes/donate/${match.params.id}`, { amount });
+      const {
+        data: { _id }
+      } = await axios.post(`/causes/donate/${match.params.id}`, { amount });
+      setDonationData({
+        ...donationData,
+        loading: false,
+        donationId: _id
+      });
       createAlert("Donation Posted Succesfully", "success");
-      history.push("/cause/" + match.params.id);
+      history.push(`/my-donations/${_id}/comment`);
     } catch (err) {
       setDonationData({
         ...donationData,

@@ -10,9 +10,11 @@ const DonationCard = props => {
     <div className="user-card-column">
       <div
         onClick={() => {
-          !props.new && props.campaign
-            ? props.history.push(`/cause/${props.id}`)
-            : props.history.push(`/my-donations/${props.id}/comment`);
+          return !props.new
+            ? props.campaign
+              ? props.history.push(`/cause/${props.id}`)
+              : props.history.push(`/my-donations/${props.id}/comment`)
+            : null;
         }}
         style={{
           cursor
