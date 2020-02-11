@@ -1,23 +1,53 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./cause.css";
-import { connect } from "react-redux";
-
+import axios from "../../../axios";
 import Aux from "../../../hoc/Aux/aux";
-import { getCause } from "../../../store/actions/causes";
 import Donations from "../../../components/donations/donations";
 import Comments from "../../../components/comments/comments";
 import Spinner from "../../../components/Spinner/spinner";
 import CustomActionButton from "../../../components/custom-action-button/actionButton";
-const Cause = ({ match, history, loading, cause, getCause }) => {
-  useEffect(() => {
-    getCause(match.params.id);
-  }, [getCause, match.params.id]);
+const Cause = ({ match, history }) => {
+  const {
+    params: { id }
+  } = match;
+  const [causes, setCauses] = useState({
+    cause: {},
+    loading: false,
+    error: {}
+  });
 
-  if (!cause && loading) {
+  useEffect(() => {
+    const getCause = async id => {
+      try {
+        setCauses({
+          cause: {},
+          error: {},
+          loading: true
+        });
+        const { data } = await axios.get(`/causes/${id}`);
+        setCauses({
+          error: {},
+          loading: false,
+          cause: data
+        });
+      } catch (err) {
+        setCauses({
+          cause: {},
+          loading: false,
+          error: err.response ? err.response.data.errMessage : err.message
+        });
+      }
+    };
+    getCause(id);
+  }, [id]);
+
+  const { cause, loading } = causes;
+
+  if (loading || Object.keys(cause).length === 0) {
     return <Spinner />;
   }
 
-  if (!cause) {
+  if (Object.keys(cause).length === 0) {
     return <p> No such cause found</p>;
   }
 
@@ -64,7 +94,7 @@ const Cause = ({ match, history, loading, cause, getCause }) => {
             )}
           </div>
         </div>
-        <Comments history={history} match={match} id={cause._id} />
+        <Comments id={cause._id} />
         <div className="p-campaign-report-button">
           <CustomActionButton>Report fundraiser</CustomActionButton>
         </div>
@@ -73,11 +103,4 @@ const Cause = ({ match, history, loading, cause, getCause }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    loading: state.cause.loading,
-    cause: state.cause.cause
-  };
-};
-
-export default connect(mapStateToProps, { getCause })(Cause);
+export default Cause;

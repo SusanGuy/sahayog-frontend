@@ -1,16 +1,44 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./comments.css";
 import Comment from "./comment/comment";
 import Spinner from "../Spinner/spinner";
-import { connect } from "react-redux";
-import { getComments } from "../../store/actions/comments";
+import axios from "../../axios";
 import ErrorBox from "../errorMessage/errorMessage";
 import Aux from "../../hoc/Aux/aux";
 import AuthButton from "../authButton/authButton";
-const Comments = ({ comments, loading, id, match, history, getComments }) => {
+const Comments = ({ id }) => {
+  const [comment, setComment] = useState({
+    comments: [],
+    loading: false,
+    error: {}
+  });
+
   useEffect(() => {
+    const getComments = async id => {
+      try {
+        setComment({
+          loading: true,
+          comments: [],
+          error: {}
+        });
+        const { data: comments } = await axios.get(`/causes/${id}/comments`);
+        setComment({
+          loading: false,
+          comments,
+          error: {}
+        });
+      } catch (err) {
+        setComment({
+          loading: false,
+          comments: [],
+          error: err.response ? err.response.data : err.errMessage
+        });
+      }
+    };
     getComments(id);
-  }, [getComments, id]);
+  }, [id]);
+
+  const { comments, loading } = comment;
 
   return (
     <div className="p-campaign-content">
@@ -46,11 +74,4 @@ const Comments = ({ comments, loading, id, match, history, getComments }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    loading: state.donation.loading,
-    comments: state.comment.comments
-  };
-};
-
-export default connect(mapStateToProps, { getComments })(Comments);
+export default Comments;

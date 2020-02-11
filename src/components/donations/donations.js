@@ -1,24 +1,44 @@
-import React, { useEffect } from "react";
-import { getDonations } from "../../store/actions/donations";
-import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
+import axios from "../../axios";
 import ErrorBox from "../errorMessage/errorMessage";
 import Spinner from "../Spinner/spinner";
 import "./donations.css";
 import CustomButton from "../CustomButton/customButton";
 import Donation from "./donation/donation";
 import AuthButton from "../authButton/authButton";
-const Donations = ({
-  history,
-  match,
-  getDonations,
-  goal,
-  donations,
-  loading,
-  id
-}) => {
+const Donations = ({ history, match, goal, id }) => {
+  const [donation, setDonation] = useState({
+    donations: [],
+    loading: false,
+    error: {}
+  });
+
   useEffect(() => {
+    const getDonations = async id => {
+      try {
+        setDonation({
+          loading: true,
+          donations: [],
+          error: {}
+        });
+        const { data: donations } = await axios.get(`/causes/${id}/donations`);
+        setDonation({
+          loading: false,
+          donations,
+          error: {}
+        });
+      } catch (err) {
+        setDonation({
+          loading: false,
+          donations: [],
+          error: err.response ? err.response.data : err.errMessage
+        });
+      }
+    };
     getDonations(id);
-  }, [getDonations, id]);
+  }, [id]);
+
+  const { donations, loading } = donation;
 
   const totalDonations = donations.reduce((total, current) => {
     return total + current.amount;
@@ -82,11 +102,5 @@ const Donations = ({
     </div>
   );
 };
-const mapStateToProps = state => {
-  return {
-    loading: state.donation.loading,
-    donations: state.donation.donations
-  };
-};
 
-export default connect(mapStateToProps, { getDonations })(Donations);
+export default Donations;

@@ -57,7 +57,6 @@ const Donate = ({ history, match, user, createAlert }) => {
         error: err.response ? err.response.data.errMessage : err.message,
         donationLoading: false
       });
-      console.log(err.response);
 
       createAlert(
         err.response ? err.response.data.errMessage : err.message,
