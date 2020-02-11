@@ -14,7 +14,7 @@ import Cause from "./containers/causes/causes";
 import Campaigns from "./containers/campaigns/campaigns";
 import Donations from "./containers/donations/donations";
 import Navigation from "./components/navigation/navigation";
-
+import CommentContainer from "./containers/commentAfterDonation/comment";
 import "./App.css";
 
 if (localStorage.token) {
@@ -37,6 +37,11 @@ const App = ({ loadUser, message, type, hidden }) => {
           exact
           path="/account-settings"
           component={AccountSetttings}
+        />
+        <PrivateRoute
+          exact
+          path="/my-donations/:id/comment"
+          component={CommentContainer}
         />
         <PrivateRoute exact path="/my-donations" component={Donations} />
         <PrivateRoute exact path="/my-campaigns" component={Campaigns} />

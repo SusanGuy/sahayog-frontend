@@ -64,7 +64,7 @@ const Cause = ({ match, history, loading, cause, getCause }) => {
             )}
           </div>
         </div>
-        <Comments comments={cause.comments} />
+        <Comments history={history} match={match} id={cause._id} />
         <div className="p-campaign-report-button">
           <CustomActionButton>Report fundraiser</CustomActionButton>
         </div>
