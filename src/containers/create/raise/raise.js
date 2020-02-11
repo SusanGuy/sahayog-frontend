@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CustomButton from "../../../components/CustomButton/customButton";
 import { withRouter } from "react-router-dom";
-
 import CustomInput from "../../../components/input/input";
 import CustomActionButton from "../../../components/custom-action-button/actionButton";
 import { connect } from "react-redux";

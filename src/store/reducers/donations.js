@@ -25,6 +25,9 @@ const donationReducer = (state = initialState, action) => {
         loading: false,
         error: payload
       };
+    case actionTypes.AUTH_LOGOUT: {
+      return initialState;
+    }
     default:
       return state;
   }

@@ -12,57 +12,52 @@ import Label from "../../../components/label/label";
 import Spinner from "../../../components/Spinner/spinner";
 import CustomInputContainer from "../../../components/customInputContainer/customInputContainer";
 import "./donate.css";
-const Donate = ({ history, match, user, loading, createAlert }) => {
+const Donate = ({ history, match, user, createAlert }) => {
   const [formData, setFormData] = useState({
-    donationLoading: false,
     amount: "",
     first_name: "",
     last_name: "",
-    email: "",
+    email: ""
+  });
+
+  const [donationData, setDonationData] = useState({
+    donationLoading: false,
     error: {}
   });
 
   useEffect(() => {
     setFormData({
-      ...formData,
+      amount: "",
       first_name: !user ? " " : user.name.split(" ")[0],
       last_name: !user ? " " : user.name.split(" ")[1],
       email: !user ? " " : user.email
     });
-  }, [user, setFormData]);
-  const {
-    amount,
-    first_name,
-    last_name,
-    error,
-    donationLoading,
-    email
-  } = formData;
+  }, [user]);
+  const { amount, first_name, last_name, email } = formData;
 
-  if (loading || !user) {
-    return <Spinner />;
-  }
+  const { donationLoading, error } = donationData;
 
-  if (donationLoading) {
+  if (donationLoading || !user) {
     return <Spinner />;
   }
 
   const handleDonation = async e => {
     e.preventDefault();
     try {
-      setFormData({
-        ...formData,
+      setDonationData({
+        ...donationData,
         loading: true
       });
       await axios.post(`/causes/donate/${match.params.id}`, { amount });
       createAlert("Donation Posted Succesfully", "success");
-
       history.push("/cause/" + match.params.id);
     } catch (err) {
-      setFormData({
-        ...formData,
+      setDonationData({
+        ...donationData,
+        error: err.response ? err.response.data.errMessage : err.message,
         donationLoading: false
       });
+      console.log(err.response);
 
       createAlert(
         err.response ? err.response.data.errMessage : err.message,
@@ -131,7 +126,6 @@ const Donate = ({ history, match, user, loading, createAlert }) => {
 
 const mapStateToProps = state => {
   return {
-    loading: state.auth.loading,
     user: state.auth.user
   };
 };

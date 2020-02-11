@@ -16,11 +16,9 @@ import Donations from "./containers/donations/donations";
 import Navigation from "./components/navigation/navigation";
 import CommentContainer from "./containers/commentAfterDonation/comment";
 import "./App.css";
-
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
-
 const App = ({ loadUser, message, type, hidden }) => {
   useEffect(() => {
     loadUser();
@@ -59,5 +57,4 @@ const mapStateToProps = state => {
     hidden: state.alert.hidden
   };
 };
-
 export default connect(mapStateToProps, { loadUser })(App);

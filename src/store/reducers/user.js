@@ -36,8 +36,9 @@ const userReducer = (state = initialState, action) => {
         loading: false
       };
 
-    case actionTypes.CLEAR_USER:
+    case actionTypes.AUTH_LOGOUT: {
       return initialState;
+    }
     default:
       return state;
   }

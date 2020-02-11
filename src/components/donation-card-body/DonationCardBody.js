@@ -15,19 +15,17 @@ const DonationCardBody = ({ campaigns, donations, error }) => {
       />
     ));
   } else if (donations) {
-    cards = donations.map(
-      ({ cause: { title, images, _id: lamo }, _id, amount, date }) => (
-        <DonationCard
-          donation
-          id={lamo}
-          key={_id}
-          image={images[0].image}
-          title={title}
-          amount={amount}
-          created={date}
-        />
-      )
-    );
+    cards = donations.map(({ cause: { title, images }, _id, amount, date }) => (
+      <DonationCard
+        donation
+        id={_id}
+        key={_id}
+        image={images[0].image}
+        title={title}
+        amount={amount}
+        created={date}
+      />
+    ));
   } else if (error) {
     cards = <p>{error}</p>;
   }

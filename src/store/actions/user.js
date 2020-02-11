@@ -21,12 +21,6 @@ const userError = err => {
   };
 };
 
-export const clearUser = () => {
-  return {
-    type: actionTypes.CLEAR_USER
-  };
-};
-
 export const getContributions = () => {
   return async dispatch => {
     try {

@@ -10,7 +10,7 @@ import AuthButton from "../authButton/authButton";
 const Comments = ({ comments, loading, id, match, history, getComments }) => {
   useEffect(() => {
     getComments(id);
-  }, [getComments]);
+  }, [getComments, id]);
 
   return (
     <div className="p-campaign-content">

@@ -23,6 +23,10 @@ const causeReducer = (state = initialState, action) => {
         loading: false
       };
 
+    case actionTypes.AUTH_LOGOUT: {
+      return initialState;
+    }
+
     default:
       return state;
   }

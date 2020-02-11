@@ -45,7 +45,7 @@ const Alert = ({ message, type, removeAlert }) => {
             ></i>
           ) : (
             <i
-              class="fas fa-check-circle"
+              className="fas fa-check-circle"
               style={{
                 color: "#006600"
               }}
