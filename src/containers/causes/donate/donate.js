@@ -20,7 +20,7 @@ const Donate = ({ history, match, user, createAlert }) => {
     first_name: "",
     last_name: "",
     email: "",
-    formError: ""
+    formError: {}
   });
 
   const [donationData, setDonationData] = useState({
@@ -35,7 +35,7 @@ const Donate = ({ history, match, user, createAlert }) => {
       first_name: !user ? " " : user.name.split(" ")[0],
       last_name: !user ? " " : user.name.split(" ")[1],
       email: !user ? " " : user.email,
-      formError: ""
+      formError: {}
     });
   }, [user]);
   const { amount, first_name, last_name, email, formError } = formData;
@@ -46,48 +46,11 @@ const Donate = ({ history, match, user, createAlert }) => {
     return <Spinner />;
   }
 
-  const handleDonation = async e => {
-    e.preventDefault();
-    if (amount === "") {
-      return setFormData({
-        ...formData,
-        formError: "Please enter a donation amount!"
-      });
-    }
-    try {
-      setDonationData({
-        ...donationData,
-        loading: true
-      });
-      const {
-        data: { _id }
-      } = await axios.post(`/causes/donate/${match.params.id}`, { amount });
-      setDonationData({
-        ...donationData,
-        loading: false,
-        donationId: _id
-      });
-      createAlert("Donation Posted Succesfully", "success");
-      history.push(`/my-donations/${_id}/comment`);
-    } catch (err) {
-      setDonationData({
-        ...donationData,
-        error: err.response ? err.response.data.errMessage : err.message,
-        donationLoading: false
-      });
-
-      createAlert(
-        err.response ? err.response.data.errMessage : err.message,
-        "failure"
-      );
-    }
-  };
-
   var config = {
     publicKey: "test_public_key_5535b5e015834104bdd1b24d62e2ec02",
-    productIdentity: "1234567890",
+    productIdentity: match.params.id,
     productName: "Dragon",
-    productUrl: "http://gameofthrones.wikia.com/wiki/Dragons",
+    productUrl: match.url.replace("/donate", ""),
     eventHandler: {
       onSuccess(payload) {
         console.log(payload);
@@ -102,6 +65,62 @@ const Donate = ({ history, match, user, createAlert }) => {
   };
 
   var checkout = new KhaltiCheckout(config);
+
+  const validateInput = () => {
+    if (amount === "") {
+      createAlert("Enter a valid amount to donate", "failure");
+      return setFormData({
+        ...formData,
+        formError: {
+          amountError: "No amount entered"
+        }
+      });
+    }
+  };
+
+  const handleDonation = async e => {
+    e.preventDefault();
+    validateInput();
+    if (Object.keys(formError).length !== 0) {
+      try {
+        setDonationData({
+          ...donationData,
+          loading: true
+        });
+        const {
+          data: { _id }
+        } = await axios.post(`/causes/donate/${match.params.id}`, { amount });
+        setDonationData({
+          ...donationData,
+          loading: false,
+          donationId: _id
+        });
+        createAlert("Donation Posted Succesfully", "success");
+        history.push(`/my-donations/${_id}/comment`);
+      } catch (err) {
+        setDonationData({
+          ...donationData,
+          error: err.response ? err.response.data.errMessage : err.message,
+          donationLoading: false
+        });
+
+        createAlert(
+          err.response ? err.response.data.errMessage : err.message,
+          "failure"
+        );
+      }
+    }
+  };
+
+  const handleKhaltiDonation = async e => {
+    e.preventDefault();
+    validateInput();
+    if (!formError) {
+      checkout.show({
+        amount: parseInt(amount) * 100
+      });
+    }
+  };
 
   return (
     <div>
@@ -140,15 +159,12 @@ const Donate = ({ history, match, user, createAlert }) => {
               </div>
 
               <hr className="custom-hr" />
-              {formError && <ErrorBox>{formError}</ErrorBox>}
+
               <div className="donate-buttons">
                 <CustomButtom>Donate</CustomButtom>
                 <CustomButtom
                   onClick={e => {
-                    e.preventDefault();
-                    checkout.show({
-                      amount: parseInt(amount) * 100
-                    });
+                    handleKhaltiDonation(e);
                   }}
                   khalti="true"
                 >
