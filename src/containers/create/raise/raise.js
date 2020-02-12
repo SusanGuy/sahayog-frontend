@@ -74,7 +74,6 @@ const Raise = ({
                     required
                   />
                 </div>
-                <ErrorBox>{error.goalError}</ErrorBox>
               </div>
             </div>
 

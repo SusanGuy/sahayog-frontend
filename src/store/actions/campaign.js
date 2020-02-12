@@ -1,11 +1,10 @@
 import * as actionTypes from "./actionTypes";
 import { createAlert } from "./alert";
 import axios from "../../axios";
+
 export const startCampaign = (goal, title, description, history, match) => {
   let validationErrors = {};
-  if (goal === "" || goal > 5000000) {
-    validationErrors.goalError = "Enter a campaign goal upto 50 lakhs!";
-  }
+
   if (
     title === "" ||
     title.split(" ").length < 4 ||
@@ -21,8 +20,10 @@ export const startCampaign = (goal, title, description, history, match) => {
   if (Object.keys(validationErrors).length !== 0) {
     return campaignError(validationErrors);
   }
+  if (goal === "" || goal > 5000000) {
+    return createAlert("Enter a campaign goal upto 50 lakhs!", "failure");
+  }
   history.push(`${match.url}/media`);
-
   return campaignStarted(goal, title, description);
 };
 

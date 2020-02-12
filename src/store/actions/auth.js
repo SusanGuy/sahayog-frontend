@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
+import { createAlert } from "../actions/alert";
 import { setAuthToken } from "../../utils";
 import { hideModal } from "../actions/ui";
 const userLoaded = (token, user) => {
@@ -14,6 +15,7 @@ export const deleteImage = () => {
     try {
       dispatch(authStart());
       await axios.delete("/users/me/avatar");
+      dispatch(createAlert("Profile picture removed succesfully", "success"));
       dispatch(loadUser());
     } catch (err) {
       dispatch(authFail(err.response ? err.response.data : err.message));
@@ -29,6 +31,7 @@ export const updateForm = email => {
       const submitForm = { email };
 
       await axios.patch("/users/me", submitForm);
+      dispatch(createAlert("Your profile has been updated!", "success"));
       dispatch(loadUser());
     } catch (err) {
       dispatch(authFail(err.response ? err.response.data : err.message));
@@ -44,6 +47,7 @@ export const uploadImage = image => {
       fd.append("upload", image, image.name);
       await axios.post("/users/me/avatar", fd);
       dispatch(loadUser());
+      dispatch(createAlert("Profile picture updated succesfully", "success"));
     } catch (err) {
       dispatch(authFail(err.response ? err.response.data : err.message));
     }
@@ -126,6 +130,9 @@ export const changePassword = (oldPassword, new_password, confirm_password) => {
       await axios.patch("/users/me/changePassword", submitForm);
       dispatch(signout());
       dispatch(hideModal());
+      dispatch(
+        createAlert("Password changed succesfully! Login again", "success")
+      );
     } catch (err) {
       dispatch(authFail(err.response ? err.response.data : err.message));
     }
