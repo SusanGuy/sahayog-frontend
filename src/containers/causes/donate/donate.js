@@ -114,12 +114,10 @@ const Donate = ({ history, match, user, createAlert }) => {
 
   const handleKhaltiDonation = async e => {
     e.preventDefault();
-    validateInput();
-    if (!formError) {
-      checkout.show({
-        amount: parseInt(amount) * 100
-      });
-    }
+
+    checkout.show({
+      amount: parseInt(amount) * 100
+    });
   };
 
   return (
