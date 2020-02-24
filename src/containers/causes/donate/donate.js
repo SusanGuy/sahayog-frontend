@@ -68,8 +68,13 @@ const Donate = ({ history, match, user, createAlert }) => {
 
   const validateInput = () => {
     let formValidate = false;
-    if (amount === "") {
-      createAlert("Enter a valid amount to donate", "failure");
+    if (amount === "" || parseInt(amount) < 10) {
+      createAlert(
+        amount === ""
+          ? "Enter a valid amount to donate"
+          : "Donation amount must be atleast Rs. 10",
+        "failure"
+      );
       setFormData({
         ...formData,
         formError: {
@@ -78,6 +83,7 @@ const Donate = ({ history, match, user, createAlert }) => {
       });
       formValidate = true;
     }
+
     return formValidate;
   };
 
@@ -157,6 +163,7 @@ const Donate = ({ history, match, user, createAlert }) => {
                 <CustomInputContainer
                   first_name={first_name}
                   last_name={last_name}
+                  disabled
                   onChange={e => {
                     if (Object.keys(formError).length !== 0) {
                       return setFormData({
@@ -170,6 +177,7 @@ const Donate = ({ history, match, user, createAlert }) => {
 
                 <Label>Email</Label>
                 <CustomInput
+                  disabled
                   name="email"
                   onChange={e => {
                     if (Object.keys(formError).length !== 0) {
