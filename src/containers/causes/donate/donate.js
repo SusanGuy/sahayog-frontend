@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../../axios";
 import handleChange from "../../../regex";
-import ErrorBox from "../../../components/errorMessage/errorMessage";
 import { connect } from "react-redux";
 import { createAlert } from "../../../store/actions/alert";
 import { withRouter } from "react-router-dom";

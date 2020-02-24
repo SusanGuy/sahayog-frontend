@@ -20,8 +20,11 @@ export const startCampaign = (goal, title, description, history, match) => {
   if (Object.keys(validationErrors).length !== 0) {
     return campaignError(validationErrors);
   }
-  if (goal === "" || goal > 5000000) {
-    return createAlert("Enter a campaign goal upto 50 lakhs!", "failure");
+  if (goal === "" || goal > 5000000 || goal < 1000) {
+    return createAlert(
+      "Enter a campaign goal between 1000 to 50 lakhs!",
+      "failure"
+    );
   }
   history.push(`${match.url}/media`);
   return campaignStarted(goal, title, description);
