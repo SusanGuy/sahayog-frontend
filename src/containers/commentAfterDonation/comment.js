@@ -86,7 +86,7 @@ const CommentContainer = ({
         <h1 className="comment-white-box-header">Donation Summary</h1>
         <div className="comment-after-donation-row">
           <div className="comment-after-donation-tile">
-            <Link to={`/cause/${id}`}>
+            <Link to={`/cause/${_id}`}>
               <div className="comment-tile-img-contain">
                 <img
                   className="comment-tile-img"
