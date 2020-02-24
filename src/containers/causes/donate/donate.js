@@ -67,21 +67,24 @@ const Donate = ({ history, match, user, createAlert }) => {
   var checkout = new KhaltiCheckout(config);
 
   const validateInput = () => {
+    let formValidate = false;
     if (amount === "") {
       createAlert("Enter a valid amount to donate", "failure");
-      return setFormData({
+      setFormData({
         ...formData,
         formError: {
           amountError: "No amount entered"
         }
       });
+      formValidate = true;
     }
+    return formValidate;
   };
 
   const handleDonation = async e => {
     e.preventDefault();
-    validateInput();
-    if (Object.keys(formError).length !== 0) {
+
+    if (!validateInput()) {
       try {
         setDonationData({
           ...donationData,
@@ -95,6 +98,7 @@ const Donate = ({ history, match, user, createAlert }) => {
           loading: false,
           donationId: _id
         });
+
         createAlert("Donation Posted Succesfully", "success");
         history.push(`/my-donations/${_id}/comment`);
       } catch (err) {
@@ -114,10 +118,11 @@ const Donate = ({ history, match, user, createAlert }) => {
 
   const handleKhaltiDonation = async e => {
     e.preventDefault();
-
-    checkout.show({
-      amount: parseInt(amount) * 100
-    });
+    if (!validateInput()) {
+      checkout.show({
+        amount: parseInt(amount) * 100
+      });
+    }
   };
 
   return (
@@ -134,7 +139,15 @@ const Donate = ({ history, match, user, createAlert }) => {
                 className="donation-amount"
                 name="amount"
                 value={amount}
-                onChange={e => handleChange(e, setFormData, error, formData)}
+                onChange={e => {
+                  if (Object.keys(formError).length !== 0) {
+                    return setFormData({
+                      ...formData,
+                      formError: {}
+                    });
+                  }
+                  handleChange(e, setFormData, error, formData);
+                }}
               />
               <div className="rupees-sign zeros">.00</div>
             </div>
@@ -144,13 +157,29 @@ const Donate = ({ history, match, user, createAlert }) => {
                 <CustomInputContainer
                   first_name={first_name}
                   last_name={last_name}
-                  onChange={e => handleChange(e, setFormData, error, formData)}
+                  onChange={e => {
+                    if (Object.keys(formError).length !== 0) {
+                      return setFormData({
+                        ...formData,
+                        formError: {}
+                      });
+                    }
+                    handleChange(e, setFormData, error, formData);
+                  }}
                 />
 
                 <Label>Email</Label>
                 <CustomInput
                   name="email"
-                  onChange={e => handleChange(e, setFormData, error, formData)}
+                  onChange={e => {
+                    if (Object.keys(formError).length !== 0) {
+                      return setFormData({
+                        ...formData,
+                        formError: {}
+                      });
+                    }
+                    handleChange(e, setFormData, error, formData);
+                  }}
                   value={email}
                   placeholder="Email"
                 />
