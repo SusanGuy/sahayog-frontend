@@ -4,7 +4,7 @@ import { withRouter, Link } from "react-router-dom";
 
 import moment from "moment";
 import "./donationCard.css";
-const DonationCard = props => {
+const DonationCard = (props) => {
   const cursor = props.new ? "unset" : "pointer";
   return (
     <div className="user-card-column">
@@ -17,7 +17,7 @@ const DonationCard = props => {
             : null;
         }}
         style={{
-          cursor
+          cursor,
         }}
         className="user-card-inner"
       >
@@ -34,11 +34,11 @@ const DonationCard = props => {
           <Aux>
             <div className="user-card-image-wrapper">
               <div className="user-card-image-wrapper-row">
-                <img alt="" src={`http://localhost:3000${props.image}`} />
+                <img alt="" src={`http://localhost:8000${props.image}`} />
               </div>
             </div>
             <div className="main-image-container">
-              <img alt="" src={`http://localhost:3000${props.image}`} />
+              <img alt="" src={`http://localhost:8000${props.image}`} />
             </div>
             <div className="campaign-action-tile-content">
               <div className="campaign-action-tile-title">{props.title}</div>

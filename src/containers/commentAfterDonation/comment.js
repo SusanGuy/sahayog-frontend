@@ -12,40 +12,40 @@ import { Link } from "react-router-dom";
 
 const CommentContainer = ({
   match: {
-    params: { id }
+    params: { id },
   },
   history,
-  user
+  user,
 }) => {
   const [state, setState] = useState({
-    comment: ""
+    comment: "",
   });
 
   const [donations, setDonations] = useState({
     donation: {},
     loading: false,
-    error: {}
+    error: {},
   });
 
   useEffect(() => {
-    const getDonation = async id => {
+    const getDonation = async (id) => {
       try {
         setDonations({
           donation: {},
           error: {},
-          loading: true
+          loading: true,
         });
         const { data } = await axios.get(`/donations/${id}`);
         setDonations({
           error: {},
           loading: false,
-          donation: data
+          donation: data,
         });
       } catch (err) {
         setDonations({
           donation: {},
           loading: false,
-          error: err.response ? err.response.data.errMessage : err.message
+          error: err.response ? err.response.data.errMessage : err.message,
         });
       }
     };
@@ -63,8 +63,8 @@ const CommentContainer = ({
     donation: {
       cause: { _id, title, images },
       amount,
-      date
-    }
+      date,
+    },
   } = donations;
 
   const handleCommentPost = async () => {
@@ -91,7 +91,7 @@ const CommentContainer = ({
                 <img
                   className="comment-tile-img"
                   alt="cause_image"
-                  src={`http://localhost:3000${images[0].image}`}
+                  src={`http://localhost:8000${images[0].image}`}
                 />
                 <div className="comment-tile-shadow"></div>
                 <div className="comment-tile-content">{title}</div>
@@ -120,10 +120,10 @@ const CommentContainer = ({
                     name="comment"
                     placeholder="Add a comment"
                     value={comment}
-                    onChange={e =>
+                    onChange={(e) =>
                       setState({
                         ...state,
-                        [e.target.name]: e.target.value
+                        [e.target.name]: e.target.value,
                       })
                     }
                   />
@@ -159,9 +159,9 @@ const CommentContainer = ({
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    user: state.auth.user
+    user: state.auth.user,
   };
 };
 
